@@ -31,7 +31,6 @@ public class Main {
             }
         }
         FlightBookingSystemData.store(fbs);
-        System.exit(0);
-        System.exit(0);
+        System.exit(0); 
     }
 }

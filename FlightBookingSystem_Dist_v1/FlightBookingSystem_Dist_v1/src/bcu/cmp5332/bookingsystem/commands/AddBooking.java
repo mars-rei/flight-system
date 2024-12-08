@@ -1,5 +1,3 @@
-// added - to complete
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import java.time.LocalDate;

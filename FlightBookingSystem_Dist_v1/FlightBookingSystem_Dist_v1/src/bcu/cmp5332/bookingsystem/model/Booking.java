@@ -1,5 +1,3 @@
-// completed for now
-
 package bcu.cmp5332.bookingsystem.model;
 
 import java.time.LocalDate;

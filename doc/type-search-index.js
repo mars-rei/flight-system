@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"bcu.cmp5332.bookingsystem.commands","l":"AddBooking"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"}];updateSearchResults();

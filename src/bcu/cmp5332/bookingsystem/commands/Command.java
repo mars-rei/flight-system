@@ -1,12 +1,14 @@
-// given - completed for now
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/**
+ * Represents a command that will be used to access a feature in the system
+ * 
+ * @author imogen
+ */
 public interface Command {
-
     public static final String HELP_MESSAGE = "Commands:\n"
         + "\tlistflights                               print all flights\n"
         + "\tlistcustomers                             print all customers\n"
@@ -21,7 +23,13 @@ public interface Command {
         + "\thelp                                      prints this help message\n"
         + "\texit                                      exits the program";
 
-    
+    /**
+	 * Executes command specified by user on the FlightBookingSystem object flightBooking System
+	 * 
+	 * @throws FlightBookingSystemException thrown when there is an invalid command
+	 * 
+	 * @author imogen
+	 */
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
     
 }

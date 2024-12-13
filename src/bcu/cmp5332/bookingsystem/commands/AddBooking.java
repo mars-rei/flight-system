@@ -35,6 +35,7 @@ public class AddBooking implements Command {
     /**
      * Represents the addBooking command constructor
      * 
+     * @param flightBookingSystem FlightBookingSystem object
      * 
      * {@inheritDoc}
      */

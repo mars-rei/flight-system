@@ -10,18 +10,34 @@ import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/**
+ * Represents the addBooking command
+ */
 public class AddBooking implements Command {
 
     private final int customerId;
     private final int flightId;
     // private final LocalDate bookingDate;
 
+    /**
+     * Represents the addBooking command constructor
+     * 
+     * @param customerId customer id (integer)
+     * 
+     * @param flightId flight id (integer)
+     */
     public AddBooking(int customerId, int flightId) {
     	this.customerId = customerId;
         this.flightId = flightId;
         // this.bookingDate = bookingDate;
     }
 
+    /**
+     * Represents the addBooking command constructor
+     * 
+     * 
+     * {@inheritDoc}
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here

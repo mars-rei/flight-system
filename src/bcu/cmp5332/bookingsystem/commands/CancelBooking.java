@@ -7,16 +7,35 @@ import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/**
+ * Represents the cancelBooking command
+ * 
+ * implements the interface Command
+ */
 public class CancelBooking implements Command {
 
     private final int customerId;
     private final int flightId;
 
+    /**
+     * Represents the cancelBooking command constructor
+     * 
+     * @param customerId customer id of booking (int)
+     * 
+     * @param flightId flight id of booking (int)
+     */
     public CancelBooking(int customerId, int flightId) {
     	this.customerId = customerId;
         this.flightId = flightId;
     }
 
+    /**
+     * Executes the cancelBooking command
+     * 
+     * @param flightBookingSystem FlightBookingSystem object
+     * 
+     * {@inheritDoc}
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here

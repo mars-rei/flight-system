@@ -1,4 +1,4 @@
-// complete for now
+// given - completed
 
 package bcu.cmp5332.bookingsystem.commands;
 
@@ -8,8 +8,20 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import java.util.List;
 
+/**
+ * Represents the listFlights command
+ * 
+ * implements the interface Command
+ */
 public class ListFlights implements Command {
 
+    /**
+     * Executes the listFlights command
+     * 
+     * @param flightBookingSystem FlightBookingSystem object
+     * 
+     * {@inheritDoc}
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         List<Flight> flights = flightBookingSystem.getFlights();

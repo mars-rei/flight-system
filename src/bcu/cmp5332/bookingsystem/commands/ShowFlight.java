@@ -6,14 +6,31 @@ import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/**
+ * Represents the showFlight command
+ * 
+ * implements the interface Command
+ */
 public class ShowFlight implements Command {
 	
 	private int id;
 
+    /**
+     * Represents the showFlight command constructor
+     * 
+     * @param id the flight's id (int)
+     */
     public ShowFlight(int id) {
     	this.id = id;
     }
 
+    /**
+     * Executes the showFlight command
+     * 
+     * @param flightBookingSystem FlightBookingSystem object
+     * 
+     * {@inheritDoc}
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here

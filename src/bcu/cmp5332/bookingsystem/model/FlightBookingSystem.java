@@ -1,4 +1,4 @@
-// unfinished
+// given - to complete
 
 package bcu.cmp5332.bookingsystem.model;
 
@@ -6,6 +6,9 @@ import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * A class that models the entire booking system
+ */
 public class FlightBookingSystem {
     
     private final LocalDate systemDate = LocalDate.parse("2024-11-11");
@@ -13,24 +16,40 @@ public class FlightBookingSystem {
     private final Map<Integer, Customer> customers = new TreeMap<>();
     private final Map<Integer, Flight> flights = new TreeMap<>();
 
+    /**
+     * Returns the system date
+     */
     public LocalDate getSystemDate() {
         return systemDate;
     }
 
+    /**
+     * Returns an unmodifiable list of all flights in system
+     * 
+     * Given implemented
+     */
     public List<Flight> getFlights() {
         List<Flight> out = new ArrayList<>(flights.values());
         return Collections.unmodifiableList(out);
     }
     
-    // added 
-    
+    /**
+     * Returns an unmodifiable list of all customers in system
+     * 
+     * To implement
+     */
     public List<Customer> getCustomers() {
     	List<Customer> out = new ArrayList<>(customers.values());
     	return Collections.unmodifiableList(out);
     }
-    
-    //
 
+    /**
+     * Finds and returns a flight using the flight id
+     * 
+     * Given implemented
+     * 
+     * @throws FlightBookingSystemException thrown when there is no flight with the given id in the system
+     */
     public Flight getFlightByID(int id) throws FlightBookingSystemException {
         if (!flights.containsKey(id)) {
             throw new FlightBookingSystemException("There is no flight with that ID.");
@@ -38,6 +57,13 @@ public class FlightBookingSystem {
         return flights.get(id);
     }
 
+    /**
+     * Finds and returns a customer using the customer id
+     * 
+     * To implement
+     * 
+     * @throws FlightBookingSystemException thrown when there is no customer with the given id in the system
+     */
     public Customer getCustomerByID(int id) throws FlightBookingSystemException {
         // TODO: implementation here
     	if (!customers.containsKey(id)) {
@@ -46,6 +72,14 @@ public class FlightBookingSystem {
         return customers.get(id);
     }
 
+    /**
+     * Adds flight to flight booking system
+     * 
+     * Given implemented
+     * 
+     * @throws FlightBookingSystemException thrown when there is already a flight 
+     * in the system with the same number and departure date
+     */
     public void addFlight(Flight flight) throws FlightBookingSystemException {
         if (flights.containsKey(flight.getId())) {
             throw new IllegalArgumentException("Duplicate flight ID.");
@@ -60,6 +94,14 @@ public class FlightBookingSystem {
         flights.put(flight.getId(), flight);
     }
 
+    /**
+     * Adds customer to flight booking system
+     * 
+     * To implement
+     * 
+     * @throws FlightBookingSystemException thrown when there is already a customer
+     *  in the system with the same email
+     */
     public void addCustomer(Customer customer) {
         // TODO: implementation here
     	if (customers.containsKey(customer.getId())) {

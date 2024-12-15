@@ -1,4 +1,4 @@
-// already completed - given
+// given - completed
 
 package bcu.cmp5332.bookingsystem.data;
 
@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads data to and stores data from the flight booking system using text file storage
+ */
 public class FlightBookingSystemData {
     
     private static final List<DataManager> dataManagers = new ArrayList<>();
@@ -22,6 +25,15 @@ public class FlightBookingSystemData {
         // dataManagers.add(new BookingDataManager());
     }
     
+    /**
+   	 * Loads customer data from text file storage to flight booking system
+   	 * 
+   	 * @param fbs a FlightBookingSystem object
+	 * 
+	 * @throws IOException thrown when there is an input / output error
+	 * 
+	 * @throws FlightBookingSystemException thrown when there is an error
+   	 */
     public static FlightBookingSystem load() throws FlightBookingSystemException, IOException {
 
         FlightBookingSystem fbs = new FlightBookingSystem();
@@ -31,6 +43,13 @@ public class FlightBookingSystemData {
         return fbs;
     }
 
+    /**
+	 * Stores customer data from flight booking system to text file storage
+	 *
+	 * @param fbs a FlightBookingSystem object
+	 * 
+	 * @throws IOException thrown when there is an input / output error
+	 */
     public static void store(FlightBookingSystem fbs) throws IOException {
 
         for (DataManager dm : dataManagers) {

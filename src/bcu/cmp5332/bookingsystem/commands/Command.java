@@ -1,3 +1,5 @@
+// given - completed
+
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -23,6 +25,8 @@ public interface Command {
 
     /**
 	 * Executes command specified by user on the FlightBookingSystem object flightBooking System
+	 * 
+	 * @param flightBookingSystem a FlightBookingSystem object
 	 * 
 	 * @throws FlightBookingSystemException thrown when there is an invalid command
 	 */

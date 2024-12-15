@@ -1,4 +1,4 @@
-// already completed - given
+// given - already completed
 
 package bcu.cmp5332.bookingsystem.data;
 
@@ -12,10 +12,18 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Represents a flight data manager 
+ * 
+ * implements the interface DataManager
+ */
 public class FlightDataManager implements DataManager {
     
     private final String RESOURCE = "./resources/data/flights.txt";
     
+    /**
+	 * Loads flight data from file storage to flight booking system
+	 */
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
         try (Scanner sc = new Scanner(new File(RESOURCE))) {
@@ -40,6 +48,9 @@ public class FlightDataManager implements DataManager {
         }
     }
     
+    /**
+	 * Stores flight data from flight booking system to file storage
+	 */
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {

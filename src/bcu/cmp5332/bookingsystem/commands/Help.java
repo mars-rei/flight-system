@@ -13,10 +13,6 @@ public class Help implements Command {
 
     /**
      * Executes the help command
-     * 
-     * @param flightBookingSystem FlightBookingSystem object
-     * 
-     * {@inheritDoc}
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) {

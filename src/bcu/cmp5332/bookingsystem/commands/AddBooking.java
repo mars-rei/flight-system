@@ -24,9 +24,9 @@ public class AddBooking implements Command {
     /**
      * Represents the addBooking command constructor
      * 
-     * @param customerId customer id (integer)
+     * @param customerId the booking's customer id (int)
      * 
-     * @param flightId flight id (integer)
+     * @param flightId the booking's flight id (int)
      */
     public AddBooking(int customerId, int flightId) {
     	this.customerId = customerId;
@@ -36,10 +36,6 @@ public class AddBooking implements Command {
 
     /**
      * Executes the addBooking command
-     * 
-     * @param flightBookingSystem FlightBookingSystem object
-     * 
-     * {@inheritDoc}
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {

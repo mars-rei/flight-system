@@ -40,10 +40,6 @@ public class AddFlight implements  Command {
     
     /**
      * Executes the addFlight command
-     * 
-     * @param flightBookingSystem FlightBookingSystem object
-     * 
-     * {@inheritDoc}
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {

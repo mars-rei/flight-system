@@ -17,10 +17,6 @@ public class ListCustomers implements Command {
 
     /**
      * Executes the listCustomers command
-     * 
-     * @param flightBookingSystem FlightBookingSystem object
-     * 
-     * {@inheritDoc}
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {

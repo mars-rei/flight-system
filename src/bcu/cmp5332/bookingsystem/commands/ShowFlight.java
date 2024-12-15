@@ -26,10 +26,6 @@ public class ShowFlight implements Command {
 
     /**
      * Executes the showFlight command
-     * 
-     * @param flightBookingSystem FlightBookingSystem object
-     * 
-     * {@inheritDoc}
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {

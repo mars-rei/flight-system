@@ -6,16 +6,35 @@ import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/**
+ * Represents the addCustomer command
+ * 
+ * implements the interface Command
+ */
 public class AddCustomer implements Command {
 
     private final String name;
     private final String phone;
 
+    /**
+     * Represents the addCustomer command constructor
+     * 
+     * @param name customer name (string)
+     * 
+     * @param phone customer phone number (string)
+     */
     public AddCustomer(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
-
+    
+    /**
+     * Executes the addCustomer command
+     * 
+     * @param flightBookingSystem FlightBookingSystem object
+     * 
+     * {@inheritDoc}
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here

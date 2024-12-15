@@ -12,6 +12,8 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 /**
  * Represents the addBooking command
+ * 
+ * implements the interface Command
  */
 public class AddBooking implements Command {
 
@@ -33,7 +35,7 @@ public class AddBooking implements Command {
     }
 
     /**
-     * Represents the addBooking command constructor
+     * Executes the addBooking command
      * 
      * @param flightBookingSystem FlightBookingSystem object
      * 

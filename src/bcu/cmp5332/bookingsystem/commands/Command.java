@@ -5,8 +5,6 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 /**
  * Represents a command that will be used to access a feature in the system
- * 
- * @author imogen
  */
 public interface Command {
     public static final String HELP_MESSAGE = "Commands:\n"
@@ -27,8 +25,6 @@ public interface Command {
 	 * Executes command specified by user on the FlightBookingSystem object flightBooking System
 	 * 
 	 * @throws FlightBookingSystemException thrown when there is an invalid command
-	 * 
-	 * @author imogen
 	 */
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
     

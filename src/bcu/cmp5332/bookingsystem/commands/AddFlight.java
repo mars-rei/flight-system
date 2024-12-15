@@ -8,7 +8,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.time.LocalDate;
 
 /**
- * Represents the addFLight command
+ * Represents the addFlight command
  * 
  * implements the interface Command
  */

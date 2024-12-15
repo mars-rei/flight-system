@@ -1,4 +1,5 @@
-// already completed
+// given - to complete
+// complete parse method to return all appropriate command objects based on user input
 
 package bcu.cmp5332.bookingsystem.main;
 
@@ -13,8 +14,20 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class used to parse the input given by the user through the application's command line interface
+ */
 public class CommandParser {
     
+	/**
+	 * Takes in the command the user inputs and parses it, calling the correct command interface based on that input
+	 * 
+	 * @param line the user's input
+	 * 
+	 * @throws IOException thrown when there is an input / output error
+	 * 
+	 * @throws FlightBookingSystemException thrown when there is an error
+	 */
     public static Command parse(String line) throws IOException, FlightBookingSystemException {
         try {
             String[] parts = line.split(" ", 3);

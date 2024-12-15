@@ -1,4 +1,4 @@
-// already completed?
+// given - completed
 
 package bcu.cmp5332.bookingsystem.main;
 
@@ -8,8 +8,20 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import java.io.*;
 
+/**
+ * Main class of the flight booking system application
+ */
 public class Main {
 
+	/**
+	 * Represents the main class constructor
+	 * 
+	 * @param args an array of strings
+	 * 	 
+	 * @throws IOException thrown when there is an input / output error
+	 * 
+	 * @throws FlightBookingSystemException thrown when there is an error
+	 */
     public static void main(String[] args) throws IOException, FlightBookingSystemException {
         
         FlightBookingSystem fbs = FlightBookingSystemData.load();

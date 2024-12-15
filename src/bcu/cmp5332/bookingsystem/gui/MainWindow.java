@@ -1,4 +1,4 @@
-// already completed?
+// given - completed - need to add more javadoc comments later
 
 package bcu.cmp5332.bookingsystem.gui;
 

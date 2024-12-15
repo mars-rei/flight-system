@@ -21,12 +21,12 @@ public class FlightBookingSystemData {
         
         /* Uncomment the two lines below when the implementation of their 
         loadData() and storeData() methods is complete */
-        // dataManagers.add(new CustomerDataManager());
-        // dataManagers.add(new BookingDataManager());
+        dataManagers.add(new CustomerDataManager());
+        dataManagers.add(new BookingDataManager());
     }
     
     /**
-   	 * Loads customer data from text file storage to flight booking system
+   	 * Loads flight booking data from text file storage to flight booking system
    	 * 
    	 * @param fbs a FlightBookingSystem object
 	 * 
@@ -44,7 +44,7 @@ public class FlightBookingSystemData {
     }
 
     /**
-	 * Stores customer data from flight booking system to text file storage
+	 * Stores flight booking data from flight booking system to text file storage
 	 *
 	 * @param fbs a FlightBookingSystem object
 	 * 

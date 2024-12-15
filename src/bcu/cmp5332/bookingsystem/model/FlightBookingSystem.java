@@ -15,6 +15,7 @@ public class FlightBookingSystem {
     
     private final Map<Integer, Customer> customers = new TreeMap<>();
     private final Map<Integer, Flight> flights = new TreeMap<>();
+    private final List<Booking> bookings = new ArrayList<>(); // added to make sense - remove if error
 
     /**
      * Returns the system date
@@ -41,6 +42,15 @@ public class FlightBookingSystem {
     public List<Customer> getCustomers() {
     	List<Customer> out = new ArrayList<>(customers.values());
     	return Collections.unmodifiableList(out);
+    }
+    
+    /**
+     * Returns an unmodifiable list of all bookings in system
+     * 
+     * To implement
+     */
+    public List<Booking> getBookings() { // added even though not specified - remove if error
+    	return Collections.unmodifiableList(bookings);
     }
 
     /**
@@ -109,5 +119,24 @@ public class FlightBookingSystem {
         }
     	// add code to throw a FlightBookingSystemException if a customer with the same email already exists in the treemap
     	customers.put(customer.getId(), customer);
+    }
+    
+    /**
+     * Adds booking to flight booking system
+     * 
+     * Given implemented
+     * 
+     * @throws FlightBookingSystemException thrown when there is already a booking 
+     * in the system with the same customer and flight 
+     */
+    public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified - remove if error
+        for (Booking book : bookings) {
+            if (book.getCustomer().equals(booking.getCustomer()) 
+                && book.getFlight().equals(booking.getFlight())) {
+            	throw new FlightBookingSystemException("There is a booking with same "
+                        + "customer and flight in the system");
+            }
+        }
+        bookings.add(booking);
     }
 }

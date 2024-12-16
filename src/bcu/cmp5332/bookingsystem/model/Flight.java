@@ -137,7 +137,17 @@ public class Flight {
      */
     public String getDetailsLong() {
         // TODO: implementation here
-        return null;
+    	String longDetails = "Flight #" + id + "\nFlight No: " + flightNumber + "\nOrigin: " + origin
+    			+ "\nDestination: " + destination + "\nDeparture Date: " + departureDate + 
+    			"\n---------------" + "\nPassengers:";
+    	for (Customer passenger: passengers) {
+    		longDetails += "\n * Id: ";
+    		longDetails += passenger.getId() + " - ";
+    		longDetails += passenger.getName() + " - ";
+    		longDetails += passenger.getPhone();
+    	}
+    	longDetails += "\n" + passengers.size() + " passenger(s)";
+    	return longDetails;
     }
     
     /**

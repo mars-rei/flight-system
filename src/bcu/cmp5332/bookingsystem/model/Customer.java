@@ -100,7 +100,18 @@ public class Customer {
      * Returns the customer details in long form
      */
     public String getDetailsLong() {
-        return "Customer #" + id + "/n Name: " + name + "/n Phone: " + phone + "/n ---------------" + "/n Bookings: "; // to continue to completion
+    	String longDetails = "Customer #" + id + "\nName: " + name + "\nPhone: " + phone + "\n---------------" + "\nBookings:";
+    	for (Booking booking: bookings) {
+    		longDetails += "\n Booking date: ";
+    		longDetails += booking.getBookingDate() + " for Flight #";
+    		longDetails += booking.getFlight().getId() + " - ";
+    		longDetails += booking.getFlight().getFlightNumber() + " - ";
+    		longDetails += booking.getFlight().getOrigin() + " to ";
+    		longDetails += booking.getFlight().getDestination() + " on ";
+    		longDetails += booking.getFlight().getDepartureDate();
+    	}
+    	longDetails += "\n" + bookings.size() + " booking(s)";
+    	return longDetails;
     }
     
     /**

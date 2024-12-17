@@ -112,31 +112,33 @@ public class FlightBookingSystem {
      * @throws FlightBookingSystemException thrown when there is already a customer
      *  in the system with the same email
      */
-    public void addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) throws FlightBookingSystemException {
         // TODO: implementation here
     	if (customers.containsKey(customer.getId())) {
             throw new IllegalArgumentException("Duplicate customer ID.");
         }
-    	// add code to throw a FlightBookingSystemException if a customer with the same email already exists in the treemap
+    	for (Customer existing : customers.values()) {
+            if (existing.getName().equals(customer.getName()) 
+                && existing.getPhone().equals(customer.getPhone())) {
+                throw new FlightBookingSystemException("There is a customer with the same name and phone number in the system");
+            }
+        }
     	customers.put(customer.getId(), customer);
     }
     
     /**
      * Adds booking to flight booking system
      * 
-     * Given implemented
+     * To implement
      * 
      * @throws FlightBookingSystemException thrown when there is already a booking 
      * in the system with the same customer and flight 
      */
     public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified - remove if error
-        for (Booking book : bookings) {
-            if (book.getCustomer().equals(booking.getCustomer()) 
-                && book.getFlight().equals(booking.getFlight())) {
-            	throw new FlightBookingSystemException("There is a booking with same "
-                        + "customer and flight in the system");
-            }
-        }
-        bookings.add(booking);
+    	if (bookings.contains(booking)) {
+    		throw new FlightBookingSystemException("There is a booking with same "
+                    + "customer and flight in the system");
+    	}
+    	bookings.add(booking);
     }
 }

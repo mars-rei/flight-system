@@ -1,4 +1,4 @@
-// added - to complete
+// added - complete
 
 package bcu.cmp5332.bookingsystem.commands;
 
@@ -19,7 +19,6 @@ public class AddBooking implements Command {
 
     private final int customerId;
     private final int flightId;
-    // private final LocalDate bookingDate;
 
     /**
      * Represents the addBooking command constructor
@@ -31,7 +30,7 @@ public class AddBooking implements Command {
     public AddBooking(int customerId, int flightId) {
     	this.customerId = customerId;
         this.flightId = flightId;
-        // this.bookingDate = bookingDate;
+        
     }
 
     /**
@@ -42,11 +41,12 @@ public class AddBooking implements Command {
         // TODO: implementation here
     	Customer customer = flightBookingSystem.getCustomerByID(customerId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
-    	LocalDate bookingDate = flightBookingSystem.getSystemDate();
+    	LocalDate bookingDate = flightBookingSystem.getSystemDate(); 
         
         Booking booking = new Booking(customer, flight, bookingDate);
-        customer.addBooking(booking); // still need to implement method in the model customer class
-        flight.addPassenger(customer); // still need to implement method in the model flight class
+        customer.addBooking(booking); 
+        flight.addPassenger(customer);
+        flightBookingSystem.addBooking(booking);
         System.out.println("Booking issued succesfully.");
     }
 }

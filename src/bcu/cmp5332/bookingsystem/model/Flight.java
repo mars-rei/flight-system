@@ -157,6 +157,11 @@ public class Flight {
      */
     public void addPassenger(Customer passenger) throws FlightBookingSystemException {
     	// TODO: implementation here   
+    	if (passengers.contains(passenger)) {
+    		throw new FlightBookingSystemException("This passenger is already on this flight.");
+    	} else {
+    		passengers.add(passenger);
+    	}
     }
     
     /**
@@ -165,6 +170,11 @@ public class Flight {
      * @throws FlightBookingSystemException thrown when there is an error
      */
     public void removePassenger(Customer passenger) throws FlightBookingSystemException {
-    	// TODO: implementation here   
+    	// TODO: implementation here       	
+    	if (passengers.contains(passenger)) {
+    		passengers.remove(passenger);
+    	} else {
+    		throw new FlightBookingSystemException("This passenger is not on this flight.");
+    	}
     }
 }

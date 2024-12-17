@@ -15,8 +15,7 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
-    private final List<Booking> bookings = new ArrayList<>();
-    // not sure if we need to edit the above line of code to this: private final List<Booking> bookings;
+    private final List<Booking> bookings;;
     
     /**
      * Represents the customer class constructor
@@ -35,7 +34,7 @@ public class Customer {
         this.name = name;
         this.phone = phone;
         
-        // not sure if we need to add this: bookings = new ArrayList<>();
+        bookings = new ArrayList<>();
     }
     
     // TODO: implementation of Getter and Setter methods
@@ -117,9 +116,14 @@ public class Customer {
     /**
      * Adds a customer booking
      */
-    public void addBooking(Booking booking) throws FlightBookingSystemException {
+    public void addBooking(Booking booking) throws FlightBookingSystemException { 
         // TODO: implementation here
-    	
+    	if (bookings.contains(booking)) {
+    		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
+    	} else {
+    		bookings.add(booking);
+    		System.out.println("adding booking " + booking + " to booking list of " + getName());
+    	}
     }
     
     /**
@@ -127,5 +131,20 @@ public class Customer {
      */
     public void cancelBookingForFlight(Flight flight) throws FlightBookingSystemException {
         // TODO: implementation here
+    	Boolean found = false;
+    	Booking bookingFound = null;
+    	
+    	for (Booking booking: bookings) {
+    		if (booking.getFlight() == flight) {
+    			found = true;
+    			bookingFound = booking;
+    		}
+    	}
+    	
+    	if (found == false) {
+    		throw new FlightBookingSystemException("There is no booking in the list that contains this flight.");
+    	} else {
+    		bookings.remove(bookingFound);
+    	}
     }
 }

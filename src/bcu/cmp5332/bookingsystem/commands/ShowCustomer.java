@@ -31,6 +31,6 @@ public class ShowCustomer implements Command {
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here
     	Customer customer = flightBookingSystem.getCustomerByID(id);
-    	System.out.println(customer.getDetailsLong()); // need to implement this method in the model customer class still
+    	System.out.println(customer.getDetailsLong()); 
     }
 }

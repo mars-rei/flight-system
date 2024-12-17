@@ -38,8 +38,8 @@ public class CancelBooking implements Command {
     	Customer customer = flightBookingSystem.getCustomerByID(customerId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
         
-        customer.cancelBookingForFlight(flight); // still need to implement method in the model customer class
-        flight.removePassenger(customer); // still need to implement method in the model flight class
+        customer.cancelBookingForFlight(flight);
+        flight.removePassenger(customer); 
         System.out.println("Booking was cancelled succesfully.");
     }
 }

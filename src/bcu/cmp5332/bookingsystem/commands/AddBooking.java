@@ -1,4 +1,4 @@
-// added - complete
+// added - completed
 
 package bcu.cmp5332.bookingsystem.commands;
 
@@ -48,7 +48,7 @@ public class AddBooking implements Command {
     	LocalDate bookedDate;
     	if (bookingDate == null) { // if booking is added by user
     		bookedDate = flightBookingSystem.getSystemDate();
-    	} else { // if booking is added by booking data manager
+    	} else { // if booking is added by booking data manager (solves date booked overriding)
     		bookedDate = bookingDate; 
     	}
         

@@ -1,4 +1,4 @@
-// given - completed
+// completed
 
 package bcu.cmp5332.bookingsystem.data;
 

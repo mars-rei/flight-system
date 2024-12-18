@@ -1,4 +1,4 @@
-// added - to complete
+// added - completed
 
 package bcu.cmp5332.bookingsystem.commands;
 

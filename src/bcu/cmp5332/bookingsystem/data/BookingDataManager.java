@@ -38,7 +38,6 @@ public class BookingDataManager implements DataManager {
                 	int customerId = Integer.parseInt(properties[0]);
                 	int flightId = Integer.parseInt(properties[1]);
                     LocalDate bookingDate = LocalDate.parse(properties[2]);
-                    Booking booking = new Booking(fbs.getCustomerByID(customerId), fbs.getFlightByID(flightId), bookingDate);
                     
                     AddBooking initialiseBooking = new AddBooking(customerId, flightId, bookingDate);
                     initialiseBooking.execute(fbs); // make sure booking is added to customer and passenger

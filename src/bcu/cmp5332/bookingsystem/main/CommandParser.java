@@ -101,11 +101,10 @@ public class CommandParser {
                 	
                 } else if (cmd.equals("cancelbooking")) { // edit cancel booking command - to complete - done!
                 	return new CancelBooking(customerId, flightId);
-                	
                 }
             }
-        } catch (NumberFormatException ex) { // to complete
-
+        } catch (NumberFormatException ex) { // completed
+        	throw new FlightBookingSystemException("Unable to parse id.");
         }
 
         throw new FlightBookingSystemException("Invalid command.");
@@ -113,7 +112,7 @@ public class CommandParser {
     
     private static LocalDate parseDateWithAttempts(BufferedReader br, int attempts) throws IOException, FlightBookingSystemException {
         if (attempts < 1) {
-            throw new IllegalArgumentException("Number of attempts should be higher that 0");
+            throw new IllegalArgumentException("Number of attempts should be higher than 0");
         }
         while (attempts > 0) {
             attempts--;

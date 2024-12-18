@@ -33,19 +33,15 @@ public class BookingDataManager implements DataManager {
             int line_idx = 1;
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                System.out.println("booking stored in file: " + line); //testing
                 String[] properties = line.split(SEPARATOR, -1);
                 try {
                 	int customerId = Integer.parseInt(properties[0]);
                 	int flightId = Integer.parseInt(properties[1]);
                     LocalDate bookingDate = LocalDate.parse(properties[2]);
                     Booking booking = new Booking(fbs.getCustomerByID(customerId), fbs.getFlightByID(flightId), bookingDate);
-                    AddBooking initialiseBooking = new AddBooking(customerId, flightId);
-                    initialiseBooking.execute(fbs); // make sure booking is added to customer and passenger
                     
-                    // to correct the date might need to use edit booking
-                    booking.setBookingDate(bookingDate); // makes sure to keep the booking date correct
-                    System.out.println(booking.getBookingDate()); // seems to work when printing but when showing customer it's incorrect
+                    AddBooking initialiseBooking = new AddBooking(customerId, flightId, bookingDate);
+                    initialiseBooking.execute(fbs); // make sure booking is added to customer and passenger
                     
                 } catch (NumberFormatException ex) {
                     throw new FlightBookingSystemException("Unable to parse id on line " + line_idx

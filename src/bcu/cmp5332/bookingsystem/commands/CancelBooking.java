@@ -1,4 +1,4 @@
-// added - to complete
+// added - completed!
 
 package bcu.cmp5332.bookingsystem.commands;
 
@@ -40,6 +40,7 @@ public class CancelBooking implements Command {
         
         customer.cancelBookingForFlight(flight);
         flight.removePassenger(customer); 
+        flightBookingSystem.cancelBooking(customer, flight);
         System.out.println("Booking was cancelled succesfully.");
     }
 }

@@ -92,14 +92,14 @@ public class CommandParser {
             	int customerId = Integer.parseInt(parts[1]);
             	int flightId = Integer.parseInt(parts[2]);
             	
-                if (cmd.equals("addbooking")) { // add booking command - to complete
-                	return new AddBooking(customerId, flightId);
+                if (cmd.equals("addbooking")) { // add booking command - to complete done!
+                	return new AddBooking(customerId, flightId, null);
                     
                 } else if (cmd.equals("editbooking")) { // edit booking command - to complete
                 	// not included in commands yet - need to add EditBooking class to commands package!!
                     
                 	
-                } else if (cmd.equals("cancelbooking")) { // edit cancel booking command - to complete
+                } else if (cmd.equals("cancelbooking")) { // edit cancel booking command - to complete - done!
                 	return new CancelBooking(customerId, flightId);
                 	
                 }

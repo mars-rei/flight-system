@@ -19,6 +19,7 @@ public class AddBooking implements Command {
 
     private final int customerId;
     private final int flightId;
+    private LocalDate bookingDate;
 
     /**
      * Represents the addBooking command constructor
@@ -26,11 +27,13 @@ public class AddBooking implements Command {
      * @param customerId the booking's customer id (int)
      * 
      * @param flightId the booking's flight id (int)
+     * 
+     * @param bookingDate the date of booking (LocalDate)
      */
-    public AddBooking(int customerId, int flightId) {
+    public AddBooking(int customerId, int flightId, LocalDate bookingDate) {
     	this.customerId = customerId;
         this.flightId = flightId;
-        
+        this.bookingDate = bookingDate;
     }
 
     /**
@@ -41,12 +44,21 @@ public class AddBooking implements Command {
         // TODO: implementation here
     	Customer customer = flightBookingSystem.getCustomerByID(customerId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
-    	LocalDate bookingDate = flightBookingSystem.getSystemDate(); 
+    	
+    	LocalDate bookedDate;
+    	if (bookingDate == null) { // if booking is added by user
+    		bookedDate = flightBookingSystem.getSystemDate();
+    	} else { // if booking is added by booking data manager
+    		bookedDate = bookingDate; 
+    	}
         
-        Booking booking = new Booking(customer, flight, bookingDate);
+        Booking booking = new Booking(customer, flight, bookedDate);
         customer.addBooking(booking); 
         flight.addPassenger(customer);
         flightBookingSystem.addBooking(booking);
-        System.out.println("Booking issued succesfully.");
+        
+        if (bookingDate == null) { // only print message if booking made by user
+        	System.out.println("Booking issued succesfully.");
+    	} 
     }
 }

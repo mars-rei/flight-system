@@ -122,7 +122,6 @@ public class Customer {
     		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
     	} else {
     		bookings.add(booking);
-    		System.out.println("adding booking " + booking + " to booking list of " + getName());
     	}
     }
     

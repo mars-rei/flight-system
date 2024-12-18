@@ -15,7 +15,7 @@ public class FlightBookingSystem {
     
     private final Map<Integer, Customer> customers = new TreeMap<>();
     private final Map<Integer, Flight> flights = new TreeMap<>();
-    private final List<Booking> bookings = new ArrayList<>(); // added to make sense - remove if error
+    private final List<Booking> bookings = new ArrayList<>(); // added even if not specified
 
     /**
      * Returns the system date
@@ -49,7 +49,7 @@ public class FlightBookingSystem {
      * 
      * To implement
      */
-    public List<Booking> getBookings() { // added even though not specified - remove if error
+    public List<Booking> getBookings() { // added even though not specified 
     	return Collections.unmodifiableList(bookings);
     }
 
@@ -110,7 +110,7 @@ public class FlightBookingSystem {
      * To implement
      * 
      * @throws FlightBookingSystemException thrown when there is already a customer
-     *  in the system with the same email
+     *  in the system with the same email - still needs to be implemented
      */
     public void addCustomer(Customer customer) throws FlightBookingSystemException {
         // TODO: implementation here
@@ -134,11 +134,36 @@ public class FlightBookingSystem {
      * @throws FlightBookingSystemException thrown when there is already a booking 
      * in the system with the same customer and flight 
      */
-    public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified - remove if error
+    public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified
     	if (bookings.contains(booking)) {
     		throw new FlightBookingSystemException("There is a booking with same "
                     + "customer and flight in the system");
     	}
     	bookings.add(booking);
+    }
+    
+    /**
+     * Deletes booking from flight booking system
+     * 
+     * To implement
+     * 
+     * @throws FlightBookingSystemException thrown when there isn't a booking 
+     * in the system with the customer and flight specified
+     */
+    public void cancelBooking(Customer customer, Flight flight) throws FlightBookingSystemException { // added even though not specified
+    	// finds booking that matches the customer and flight
+    	Booking bookingFound = null;
+        for (Booking existing : bookings) {
+            if (existing.getCustomer() == customer && existing.getFlight() == flight) {
+            	bookingFound = existing;
+            }
+        }
+        
+        if (bookingFound != null) {
+        	bookings.remove(bookingFound);
+        } else {
+        	throw new FlightBookingSystemException("There is no booking with this customer and flight in the system");
+        }
+    	
     }
 }

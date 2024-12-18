@@ -27,6 +27,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     private JTextField originText = new JTextField();
     private JTextField destinationText = new JTextField();
     private JTextField depDateText = new JTextField();
+    private JTextField capacityText = new JTextField();
+    private JTextField priceText = new JTextField();
 
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
@@ -60,6 +62,10 @@ public class AddFlightWindow extends JFrame implements ActionListener {
         topPanel.add(destinationText);
         topPanel.add(new JLabel("Departure Date (YYYY-MM-DD) : "));
         topPanel.add(depDateText);
+        topPanel.add(new JLabel("Capacity : "));
+        topPanel.add(capacityText);
+        topPanel.add(new JLabel("Price : £"));
+        topPanel.add(priceText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
@@ -100,8 +106,12 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             catch (DateTimeParseException dtpe) {
                 throw new FlightBookingSystemException("Date must be in YYYY-DD-MM format");
             }
+            
+            int capacity = Integer.parseInt(capacityText.getText());
+            double price = Double.parseDouble(priceText.getText());
+            
             // create and execute the AddFlight Command
-            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate);
+            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate, capacity, price);
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
             mw.displayFlights();

@@ -20,6 +20,8 @@ public class Flight {
     private String origin;
     private String destination;
     private LocalDate departureDate;
+    private int capacity;
+    private double price;
 
     private final Set<Customer> passengers;
 
@@ -35,13 +37,20 @@ public class Flight {
      * @param destination the airport the flight lands at (string)
      * 
      * @param departureDate the date the flight departs (local date)
+     * 
+     * @param capacity the number of seats in the flight (int)
+     * 
+     * @param price the price of the flight (double)
      */
-    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate) {
+    public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate,
+    		int capacity, double price) {
         this.id = id;
         this.flightNumber = flightNumber;
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
+        this.capacity = capacity;
+        this.price = price;
         
         passengers = new HashSet<>();
     }
@@ -117,6 +126,34 @@ public class Flight {
     }
 
     /**
+     * Returns the flight capacity
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
+     * Sets the flight capacity
+     */
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+    
+    /**
+     * Returns the price of the flight
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * Sets the price of the flight
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    /**
      * Returns the flight passengers
      */
     public List<Customer> getPassengers() {
@@ -139,6 +176,7 @@ public class Flight {
         // TODO: implementation here
     	String longDetails = "Flight #" + id + "\nFlight No: " + flightNumber + "\nOrigin: " + origin
     			+ "\nDestination: " + destination + "\nDeparture Date: " + departureDate + 
+    			"\nNumber of seats: " + capacity + "\nPrice :£" + price + 
     			"\n---------------" + "\nPassengers:";
     	for (Customer passenger: passengers) {
     		longDetails += "\n * Id: ";

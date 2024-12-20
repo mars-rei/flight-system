@@ -178,7 +178,7 @@ public class Flight {
     			+ "\nDestination: " + destination + "\nDeparture Date: " + departureDate + 
     			"\nNumber of seats: " + capacity + "\nPrice :£" + price + 
     			"\n---------------" + "\nPassengers:";
-    	for (Customer passenger: passengers) {
+    	for (Customer passenger: getPassengers()) {
     		longDetails += "\n * Id: ";
     		longDetails += passenger.getId() + " - ";
     		longDetails += passenger.getName() + " - ";

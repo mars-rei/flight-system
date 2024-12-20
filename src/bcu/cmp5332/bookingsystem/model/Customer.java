@@ -100,7 +100,7 @@ public class Customer {
      */
     public String getDetailsLong() {
     	String longDetails = "Customer #" + id + "\nName: " + name + "\nPhone: " + phone + "\n---------------" + "\nBookings:";
-    	for (Booking booking: bookings) {
+    	for (Booking booking: getBookings()) {
     		longDetails += "\n Booking date: ";
     		longDetails += booking.getBookingDate() + " for Flight #";
     		longDetails += booking.getFlight().getId() + " - ";
@@ -109,7 +109,7 @@ public class Customer {
     		longDetails += booking.getFlight().getDestination() + " on ";
     		longDetails += booking.getFlight().getDepartureDate();
     	}
-    	longDetails += "\n" + bookings.size() + " booking(s)";
+    	longDetails += "\n" + getBookings().size() + " booking(s)";
     	return longDetails;
     }
     

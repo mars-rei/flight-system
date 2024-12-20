@@ -92,14 +92,14 @@ public class Customer {
      * Returns the customer details in short form
      */
     public String getDetailsShort() {
-        return "Customer #" + id + " - " + name + " - " + phone;
+        return "Customer #" + getId() + " - " + getName() + " - " + getPhone();
     }
     
     /**
      * Returns the customer details in long form
      */
     public String getDetailsLong() {
-    	String longDetails = "Customer #" + id + "\nName: " + name + "\nPhone: " + phone + "\n---------------" + "\nBookings:";
+    	String longDetails = "Customer #" + getId() + "\nName: " + getName() + "\nPhone: " + getPhone() + "\n---------------" + "\nBookings:";
     	for (Booking booking: getBookings()) {
     		longDetails += "\n Booking date: ";
     		longDetails += booking.getBookingDate() + " for Flight #";
@@ -118,7 +118,7 @@ public class Customer {
      */
     public void addBooking(Booking booking) throws FlightBookingSystemException { 
         // TODO: implementation here
-    	if (bookings.contains(booking)) {
+    	if (getBookings().contains(booking)) {
     		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
     	} else {
     		bookings.add(booking);
@@ -133,7 +133,7 @@ public class Customer {
     	Boolean found = false;
     	Booking bookingFound = null;
     	
-    	for (Booking booking: bookings) {
+    	for (Booking booking: getBookings()) {
     		if (booking.getFlight() == flight) {
     			found = true;
     			bookingFound = booking;

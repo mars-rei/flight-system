@@ -15,6 +15,7 @@ public class AddCustomer implements Command {
 
     private final String name;
     private final String phone;
+    private final String email;
 
     /**
      * Represents the addCustomer command constructor
@@ -22,10 +23,13 @@ public class AddCustomer implements Command {
      * @param name customer name (string)
      * 
      * @param phone customer phone number (string)
+     * 
+     * @param email customer email address (string)
      */
-    public AddCustomer(String name, String phone) {
+    public AddCustomer(String name, String phone, String email) {
         this.name = name;
         this.phone = phone;
+        this.email = email;
     }
     
     /**
@@ -40,7 +44,7 @@ public class AddCustomer implements Command {
             maxId = flightBookingSystem.getCustomers().get(lastIndex).getId();
         }
         
-        Customer customer = new Customer(++maxId, name, phone);
+        Customer customer = new Customer(++maxId, name, phone, email);
         flightBookingSystem.addCustomer(customer);
         System.out.println("Customer #" + customer.getId() + " added.");
     }

@@ -110,7 +110,7 @@ public class FlightBookingSystem {
      * To implement
      * 
      * @throws FlightBookingSystemException thrown when there is already a customer
-     *  in the system with the same email - still needs to be implemented
+     *  in the system with the same email
      */
     public void addCustomer(Customer customer) throws FlightBookingSystemException {
         // TODO: implementation here
@@ -118,9 +118,8 @@ public class FlightBookingSystem {
             throw new IllegalArgumentException("Duplicate customer ID.");
         }
     	for (Customer existing : customers.values()) {
-            if (existing.getName().equals(customer.getName()) 
-                && existing.getPhone().equals(customer.getPhone())) {
-                throw new FlightBookingSystemException("There is a customer with the same name and phone number in the system");
+            if (existing.getEmail().equals(customer.getEmail())) {
+                throw new FlightBookingSystemException("There is a customer with the same email in the system");
             }
         }
     	customers.put(customer.getId(), customer);

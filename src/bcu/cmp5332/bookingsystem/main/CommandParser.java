@@ -66,8 +66,10 @@ public class CommandParser {
                 String name = reader.readLine();
                 System.out.print("Phone number: ");
                 String phone = reader.readLine();
+                System.out.print("Email: ");
+                String email = reader.readLine();
                 
-                return new AddCustomer(name, phone);
+                return new AddCustomer(name, phone, email);
                 
             } else if (cmd.equals("loadgui")) { // load gui command - given
                 return new LoadGUI();

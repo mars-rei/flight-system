@@ -15,6 +15,7 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
+    private String email;
     private final List<Booking> bookings;;
     
     /**
@@ -25,14 +26,17 @@ public class Customer {
      * @param name the customer's name (string)
      * 
      * @param phone the customer's phone number (string)
+     * 
+     * @param email the customer's email (string)
      */
     
     // TODO: implement constructor here
     
-    public Customer(int id, String name, String phone) {
+    public Customer(int id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
+        this.email = email;
         
         bookings = new ArrayList<>();
     }
@@ -82,6 +86,20 @@ public class Customer {
     }
     
     /**
+     * Returns the customer email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets the customer phone email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    /**
      * Returns the customer bookings
      */
     public List<Booking> getBookings() {
@@ -92,14 +110,14 @@ public class Customer {
      * Returns the customer details in short form
      */
     public String getDetailsShort() {
-        return "Customer #" + getId() + " - " + getName() + " - " + getPhone();
+        return "Customer #" + getId() + " - " + getName() + " - " + getPhone() + " - " + getEmail();
     }
     
     /**
      * Returns the customer details in long form
      */
     public String getDetailsLong() {
-    	String longDetails = "Customer #" + getId() + "\nName: " + getName() + "\nPhone: " + getPhone() + "\n---------------" + "\nBookings:";
+    	String longDetails = "Customer #" + getId() + "\nName: " + getName() + "\nPhone: " + getPhone() + "\nEmail: " + getEmail() + "\n---------------" + "\nBookings:";
     	for (Booking booking: getBookings()) {
     		longDetails += "\n Booking date: ";
     		longDetails += booking.getBookingDate() + " for Flight #";

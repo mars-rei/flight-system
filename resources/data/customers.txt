@@ -1,5 +1,5 @@
-1::Abdel-Rahman Tawil::07555555555::
-2::Kostas Vlachos::07596454545::
-3::Mars::12345678987::
-4::Jasmine::04040404040::
-5::Valeria::09876543212::
+1::Abdel-Rahman Tawil::07555555555::art@bcu.ac.uk::
+2::Kostas Vlachos::07596454545::kv@bcu.ac.uk::
+3::Mars Dicen::12345678987::mrd@bcu.ac.uk::
+4::Jasmine Kaur::04040404040::jk@bcu.ac.uk::
+5::Valeria Bassan::09876543212::vb@bcu.ac.uk::

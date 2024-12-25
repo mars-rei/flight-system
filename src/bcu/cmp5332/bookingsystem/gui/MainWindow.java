@@ -4,15 +4,18 @@ package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Booking;
+import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -32,6 +35,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem adminExit;
 
     private JMenuItem flightsView;
+    private JMenuItem flightsViewPassengers; // added
     private JMenuItem flightsAdd;
     private JMenuItem flightsDel;
     
@@ -40,6 +44,7 @@ public class MainWindow extends JFrame implements ActionListener {
     private JMenuItem bookingsCancel;
 
     private JMenuItem custView;
+    private JMenuItem custViewBookings; // added
     private JMenuItem custAdd;
     private JMenuItem custDel;
 
@@ -56,7 +61,7 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Initialize the contents of the frame.
+     * Initialise the contents of the frame.
      */
     private void initialize() {
 
@@ -84,9 +89,11 @@ public class MainWindow extends JFrame implements ActionListener {
         menuBar.add(flightsMenu);
 
         flightsView = new JMenuItem("View");
+        flightsViewPassengers = new JMenuItem("Flight Passengers");
         flightsAdd = new JMenuItem("Add");
         flightsDel = new JMenuItem("Delete");
         flightsMenu.add(flightsView);
+        flightsMenu.add(flightsViewPassengers);
         flightsMenu.add(flightsAdd);
         flightsMenu.add(flightsDel);
         // adding action listener for Flights menu items
@@ -96,7 +103,7 @@ public class MainWindow extends JFrame implements ActionListener {
         
         // adding Bookings menu and menu items
         bookingsMenu = new JMenu("Bookings");
-        
+    
         bookingsIssue = new JMenuItem("Issue");
         bookingsUpdate = new JMenuItem("Update");
         bookingsCancel = new JMenuItem("Cancel");
@@ -113,14 +120,17 @@ public class MainWindow extends JFrame implements ActionListener {
         menuBar.add(customersMenu);
 
         custView = new JMenuItem("View");
+        custViewBookings = new JMenuItem("Customer Bookings");
         custAdd = new JMenuItem("Add");
         custDel = new JMenuItem("Delete");
 
         customersMenu.add(custView);
+        customersMenu.add(custViewBookings);
         customersMenu.add(custAdd);
         customersMenu.add(custDel);
         // adding action listener for Customers menu items
         custView.addActionListener(this);
+        custViewBookings.addActionListener(this);
         custAdd.addActionListener(this);
         custDel.addActionListener(this);
 
@@ -130,6 +140,8 @@ public class MainWindow extends JFrame implements ActionListener {
         setAutoRequestFocus(true);
         toFront();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        
 /* Uncomment the following line to not terminate the console app when the window is closed */
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);        
 
@@ -140,8 +152,6 @@ public class MainWindow extends JFrame implements ActionListener {
         FlightBookingSystem fbs = FlightBookingSystemData.load();
         new MainWindow(fbs);			
     }
-
-
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -156,6 +166,9 @@ public class MainWindow extends JFrame implements ActionListener {
         } else if (ae.getSource() == flightsView) {
             displayFlights();
             
+        } else if (ae.getSource() == flightsViewPassengers) { // added to view passengers of a flight
+        	new ShowFlightPassengersWindow(this);
+        	
         } else if (ae.getSource() == flightsAdd) {
             new AddFlightWindow(this);
             
@@ -169,10 +182,13 @@ public class MainWindow extends JFrame implements ActionListener {
             
             
         } else if (ae.getSource() == custView) {
+        	displayCustomers();
             
-            
-        } else if (ae.getSource() == custAdd) {
-            
+        } else if (ae.getSource() == custViewBookings) { // added to view bookings of a customer
+        	new ShowCustomerBookingsWindow(this);
+        	
+    	}else if (ae.getSource() == custAdd) {
+        	new AddCustomerWindow(this);
             
         } else if (ae.getSource() == custDel) {
             
@@ -183,22 +199,100 @@ public class MainWindow extends JFrame implements ActionListener {
     public void displayFlights() {
         List<Flight> flightsList = fbs.getFlights();
         // headers for the table
-        String[] columns = new String[]{"Flight No", "Origin", "Destination", "Departure Date", "Capacity", "Price"};
+        String[] columns = new String[]{"ID", "Flight No", "Origin", "Destination", "Departure Date", "Capacity", "Price"};
 
-        Object[][] data = new Object[flightsList.size()][6];
+        Object[][] data = new Object[flightsList.size()][7];
         for (int i = 0; i < flightsList.size(); i++) {
             Flight flight = flightsList.get(i);
-            data[i][0] = flight.getFlightNumber();
-            data[i][1] = flight.getOrigin();
-            data[i][2] = flight.getDestination();
-            data[i][3] = flight.getDepartureDate();
-            data[i][4] = flight.getCapacity();
-            data[i][5] = flight.getPrice();
+            data[i][0] = flight.getId(); // added id to help with selection
+            data[i][1] = flight.getFlightNumber();
+            data[i][2] = flight.getOrigin();
+            data[i][3] = flight.getDestination();
+            data[i][4] = flight.getDepartureDate();
+            data[i][5] = flight.getCapacity();
+            data[i][6] = flight.getPrice();
         }
 
         JTable table = new JTable(data, columns);
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
-    }	
+    }
+    
+    public void displayPassengers(int flightId) {
+		try {
+			Flight flightSelected = fbs.getFlightByID(flightId);
+			
+			List<Customer> passengers = flightSelected.getPassengers();
+	    	
+	        // headers for the table
+	        String[] columns = new String[]{"ID", "Name", "Phone", "Email"};
+
+	        Object[][] data = new Object[passengers.size()][4];
+	        for (int i = 0; i < passengers.size(); i++) {
+	            Customer passenger = passengers.get(i);
+	            data[i][0] = passenger.getId(); 
+	            data[i][1] = passenger.getName();
+	            data[i][2] = passenger.getPhone();
+	            data[i][3] = passenger.getEmail();
+	        }
+
+	        JTable table = new JTable(data, columns);
+	        this.getContentPane().removeAll();
+	        this.getContentPane().add(new JScrollPane(table));
+	        this.revalidate();
+		} catch (FlightBookingSystemException e) {
+			JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+    }
+    
+    public void displayCustomers() {
+        List<Customer> customersList = fbs.getCustomers();
+        // headers for the table
+        String[] columns = new String[]{"ID", "Name", "Phone", "Email", "No. of Bookings"};
+
+        Object[][] data = new Object[customersList.size()][5];
+        for (int i = 0; i < customersList.size(); i++) {
+            Customer customer = customersList.get(i);
+            data[i][0] = customer.getId();
+            data[i][1] = customer.getName();
+            data[i][2] = customer.getPhone();
+            data[i][3] = customer.getEmail();
+            data[i][4] = (customer.getBookings()).size();
+        }
+
+        JTable table = new JTable(data, columns);
+        this.getContentPane().removeAll();
+        this.getContentPane().add(new JScrollPane(table));
+        this.revalidate();
+    }
+    
+    public void displayCustomerBookings(int customerId) {
+		try {
+			Customer customerSelected = fbs.getCustomerByID(customerId);
+			
+			List<Booking> bookings = customerSelected.getBookings();
+	    	
+	        // headers for the table
+	        String[] columns = new String[]{"Booking Date", "Flight Id", "Flight No.", "Origin", "Destination", "Departure"};
+
+	        Object[][] data = new Object[bookings.size()][6];
+	        for (int i = 0; i < bookings.size(); i++) {
+	            Booking booking = bookings.get(i);
+	            data[i][0] = booking.getBookingDate();
+	            data[i][1] = booking.getFlight().getId(); 
+	            data[i][2] = booking.getFlight().getFlightNumber();
+	            data[i][3] = booking.getFlight().getOrigin();
+	            data[i][4] = booking.getFlight().getDestination();
+	            data[i][5] = booking.getFlight().getDepartureDate();
+	        }
+
+	        JTable table = new JTable(data, columns);
+	        this.getContentPane().removeAll();
+	        this.getContentPane().add(new JScrollPane(table));
+	        this.revalidate();
+		} catch (FlightBookingSystemException e) {
+			JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+    }
 }

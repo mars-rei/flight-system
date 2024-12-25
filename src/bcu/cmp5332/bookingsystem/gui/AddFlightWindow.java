@@ -39,7 +39,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Initialize the contents of the frame.
+     * Initialise the contents of the frame.
      */
     private void initialize() {
 
@@ -51,9 +51,9 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         setTitle("Add a New Flight");
 
-        setSize(350, 220);
+        setSize(400, 220); // changed 350 to 400
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2));
+        topPanel.setLayout(new GridLayout(10, 1)); // changed from 5, 2 for it to be more legible
         topPanel.add(new JLabel("Flight No : "));
         topPanel.add(flightNoText);
         topPanel.add(new JLabel("Origin : "));
@@ -87,14 +87,14 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == addBtn) {
-            addBook();
+            addFlight(); // changed from addBook to addFlight
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
 
     }
 
-    private void addBook() {
+    private void addFlight() { // changed addBook to addFlight
         try {
             String flightNumber = flightNoText.getText();
             String origin = originText.getText();

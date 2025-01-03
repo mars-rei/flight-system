@@ -135,8 +135,7 @@ public class FlightBookingSystem {
      */
     public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified
     	if (bookings.contains(booking)) {
-    		throw new FlightBookingSystemException("There is a booking with same "
-                    + "customer and flight in the system");
+    		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
     	}
     	bookings.add(booking);
     }

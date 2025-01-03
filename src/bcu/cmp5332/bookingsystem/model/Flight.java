@@ -176,7 +176,7 @@ public class Flight {
         // TODO: implementation here
     	String longDetails = "Flight #" + id + "\nFlight No: " + flightNumber + "\nOrigin: " + origin
     			+ "\nDestination: " + destination + "\nDeparture Date: " + departureDate + 
-    			"\nNumber of seats: " + capacity + "\nPrice :£" + price + 
+    			"\nNumber of seats: " + capacity + "\nPrice: £" + price + 
     			"\n---------------" + "\nPassengers:";
     	for (Customer passenger: getPassengers()) {
     		longDetails += "\n * Id: ";

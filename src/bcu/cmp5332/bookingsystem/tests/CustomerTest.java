@@ -1,5 +1,3 @@
-// still needs to be fully completed
-
 package bcu.cmp5332.bookingsystem.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,20 +29,20 @@ class CustomerTest {
 	}
 
 	@Test
-	void testAddBooking() throws FlightBookingSystemException {
+	void addBooking() throws FlightBookingSystemException {
 		customer.addBooking(booking);
 		assertTrue(customer.getBookings().contains(booking));
 	}
 
 	@Test
-	void testCancelBooking() throws FlightBookingSystemException{
+	void cancelBooking() throws FlightBookingSystemException{
 		customer.addBooking(booking);
 		customer.cancelBookingForFlight(flight);
 		assertFalse(customer.getBookings().contains(booking)); 
 	}
 
-	@Test // 
-	void testAddDuplicateBooking() throws FlightBookingSystemException {
+	@Test 
+	void addDuplicateBooking() throws FlightBookingSystemException {
 		Booking booking = new Booking(customer, flight, LocalDate.now());
 		customer.addBooking(booking);
 		
@@ -54,27 +52,41 @@ class CustomerTest {
 		assertEquals("There is a booking with same customer and flight in the system", exception.getMessage());
 	}
 	
-	@Test // 
-	void testCancelBookingNotFound() {
+	@Test 
+	void bookingNotFound() {
 		FlightBookingSystemException exception = assertThrows(FlightBookingSystemException.class, () -> {
 			customer.cancelBookingForFlight(flight);
 		});
-
 		assertEquals("There is no booking in the list that contains this flight.", exception.getMessage());
 	}
 
-	@Test // 
-	void testGetDetailsShort() {
+	@Test 
+	void getDetailsShort() {
 		String expected = "Customer #1 - John Doe - 07555555555 - johndoe@example.com";
 		assertEquals(expected, customer.getDetailsShort());
 	}
 
-	@Test // 
-	void testGetDetailsLong() throws FlightBookingSystemException {
+	@Test 
+	void getDetailsLong() throws FlightBookingSystemException {
 		customer.addBooking(booking);
 		String expected = "Customer #1\nName: John Doe\nPhone: 07555555555\nEmail: johndoe@example.com\n---------------\nBookings:\n Booking date: " 
 				+ LocalDate.now() + " for Flight #1 - LH2560 - Birmingham to Munich on 2024-11-11\n1 booking(s)";
 		assertEquals(expected, customer.getDetailsLong());
 	}
+	
+	/* not really sure if the two below are needed
+	@Test
+	void validPhoneNumber() {
+		assertEquals("07555555555", customer.getPhone());
+	}*/
+	
+	/*@Test
+	void invalidPhoneNumber() {
+		Exception exception= assertThrows(IllegalArgumentException.class, () -> {
+			new Customer(1, "Abdel-Rahman Tawil", "07555555555555", "art@bcu.ac.uk");
+	});
+		assertEquals("Invalid phone number format", exception.getMessage());
+	}*/
+	
 }
 

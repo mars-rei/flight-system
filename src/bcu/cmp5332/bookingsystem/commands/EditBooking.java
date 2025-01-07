@@ -42,4 +42,14 @@ public class EditBooking implements Command {
     	// plays with the setter method in Booking class
         System.out.println("Booking was edited and updated succesfully.");
     }
+    
+    @Override
+    public void rollback(FlightBookingSystem flightBookingSystem) {  
+    	System.out.println("Error storing updated booking data.");
+    	
+    	// idk how to retrieve this info unless we use a temporary file to store new changes instead
+        
+		System.out.println("Booking update withdrawn.");
+		
+    }
 }

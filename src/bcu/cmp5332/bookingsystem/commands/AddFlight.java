@@ -2,9 +2,13 @@
 
 package bcu.cmp5332.bookingsystem.commands;
 
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
+
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -60,6 +64,25 @@ public class AddFlight implements  Command {
         
         Flight flight = new Flight(++maxId, flightNumber, origin, destination, departureDate, capacity, price);
         flightBookingSystem.addFlight(flight);
-        System.out.println("Flight #" + flight.getId() + " added.");
+    	System.out.println("Flight #" + flight.getId() + " added.");
+   
+    }
+    
+    @Override
+    public void rollback(FlightBookingSystem flightBookingSystem) {  
+    	System.out.println("Error storing new flight data.");
+    	
+    	int lastIndex = flightBookingSystem.getFlights().size() - 1;
+        int newestId = flightBookingSystem.getFlights().get(lastIndex).getId();
+        
+        Flight flight;
+		try {
+			flight = flightBookingSystem.getFlightByID(newestId);
+			flightBookingSystem.removeFlight(flight);
+			System.out.println("Flight #" + newestId + " addition withdrawn.");
+		} catch (FlightBookingSystemException e) {
+			System.out.println(e.getMessage());
+		}
+       
     }
 }

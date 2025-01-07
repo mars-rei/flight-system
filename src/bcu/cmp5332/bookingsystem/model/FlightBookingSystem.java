@@ -103,6 +103,13 @@ public class FlightBookingSystem {
         }
         flights.put(flight.getId(), flight);
     }
+    
+    /**
+     * Removes flight from flight booking system
+     */
+    public void removeFlight(Flight flight){
+    	flights.remove(flight.getId(), flight);
+    }
 
     /**
      * Adds customer to flight booking system
@@ -123,6 +130,13 @@ public class FlightBookingSystem {
             }
         }
     	customers.put(customer.getId(), customer);
+    }
+    
+    /**
+     * Removes customer from flight booking system
+     */
+    public void removeCustomer(Customer customer){
+    	customers.remove(customer.getId(), customer);
     }
     
     /**

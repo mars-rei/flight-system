@@ -32,4 +32,8 @@ public interface Command {
 	 */
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
     
+    default void rollback(FlightBookingSystem flightBookingSystem) {
+    	// default is empty as this only affects commands that update the state of the system
+    }
+    
 }

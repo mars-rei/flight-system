@@ -2,8 +2,10 @@
 
 package bcu.cmp5332.bookingsystem.commands;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
@@ -57,8 +59,28 @@ public class AddBooking implements Command {
         flight.addPassenger(customer);
         flightBookingSystem.addBooking(booking);
         
-        if (bookingDate == null) { // only print message if booking made by user
-        	System.out.println("Booking issued succesfully.");
+        if (bookingDate == null) { // only prints message if booking made by user
+            System.out.println("Booking issued succesfully.");
     	} 
+    }
+    
+    @Override
+    public void rollback(FlightBookingSystem flightBookingSystem) {  
+    	System.out.println("Error storing new booking data.");
+    	
+    	Booking mostRecent = (flightBookingSystem.getBookings()).get(flightBookingSystem.getBookings().size()-1);
+    	Customer customer = mostRecent.getCustomer();
+    	Flight flight = mostRecent.getFlight();
+    	
+    	try {
+			customer.cancelBookingForFlight(flight);
+			flight.removePassenger(customer); 
+	        flightBookingSystem.cancelBooking(customer, flight);
+		} catch (FlightBookingSystemException e) {
+			System.out.println(e.getMessage());
+		}
+        
+		System.out.println("Booking addition withdrawn.");
+       
     }
 }

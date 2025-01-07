@@ -22,29 +22,45 @@ public class Main {
 	 * 
 	 * @throws FlightBookingSystemException thrown when there is an error
 	 */
-    public static void main(String[] args) throws IOException, FlightBookingSystemException {
-        
-        FlightBookingSystem fbs = FlightBookingSystemData.load();
+	public static void main(String[] args) throws IOException, FlightBookingSystemException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		FlightBookingSystem fbs = FlightBookingSystemData.load();
 
-        System.out.println("Flight Booking System");
-        System.out.println("Enter 'help' to see a list of available commands.");
-        while (true) {
-            System.out.print("> ");
-            String line = br.readLine();
-            if (line.equals("exit")) {
-                break;
-            }
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-            try {
-                Command command = CommandParser.parse(line);
-                command.execute(fbs);
-            } catch (FlightBookingSystemException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-        FlightBookingSystemData.store(fbs);
-        System.exit(0); 
-    }
+		System.out.println("Flight Booking System");
+		System.out.println("Enter 'help' to see a list of available commands.");
+		while (true) {
+			System.out.print("> ");
+			String line = br.readLine();
+			if (line.equals("exit")) {
+				break;
+			}
+
+			// tryna figure this out
+			boolean rollback = false;
+			Command command = null;
+
+			try {
+				command = CommandParser.parse(line);
+				command.execute(fbs);
+				
+				FlightBookingSystemData.store(fbs);
+
+			} catch (FlightBookingSystemException ex) {
+				System.out.println(ex.getMessage());
+			} catch (IOException ex) {
+				// rollback code
+				rollback = true;
+
+			} finally {
+				if (rollback == true) {
+					command.rollback(fbs);
+				}
+			}
+
+		}
+		// FlightBookingSystemData.store(fbs);
+		System.exit(0); 
+	}
 }

@@ -57,7 +57,13 @@ public class BookingDataManager implements DataManager {
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         // TODO: implementation here
-    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
+    	
+    	// test: changing to read-only
+    	File bookingFile = new File(RESOURCE);
+    	bookingFile.setReadOnly();
+    	// would also need to change RESOURCE below to bookingFile
+    	
+    	try (PrintWriter out = new PrintWriter(new FileWriter(bookingFile))) {
             for (Booking booking : fbs.getBookings()) { 
                 out.print(booking.getCustomer().getId() + SEPARATOR);
                 out.print(booking.getFlight().getId() + SEPARATOR);

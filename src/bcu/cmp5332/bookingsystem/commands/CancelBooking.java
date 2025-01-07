@@ -3,6 +3,7 @@
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -42,5 +43,15 @@ public class CancelBooking implements Command {
         flight.removePassenger(customer); 
         flightBookingSystem.cancelBooking(customer, flight);
         System.out.println("Booking was cancelled succesfully.");
+    }
+    
+    @Override
+    public void rollback(FlightBookingSystem flightBookingSystem) {  
+    	System.out.println("Error updating booking data.");
+    	
+    	// idk how to retrieve this info unless we use a temporary file to store new changes instead
+        
+		System.out.println("Booking cancellation withdrawn.");
+		
     }
 }

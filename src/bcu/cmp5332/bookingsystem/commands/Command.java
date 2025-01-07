@@ -36,4 +36,8 @@ public interface Command {
     	// default is empty as this only affects commands that update the state of the system
     }
     
+    default void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {
+    	// default is empty as this only affects the editbooking and cancelbooking commands
+    }
+    
 }

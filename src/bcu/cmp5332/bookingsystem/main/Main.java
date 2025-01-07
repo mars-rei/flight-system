@@ -1,4 +1,4 @@
-// given - completed
+// UNFINISHED
 
 package bcu.cmp5332.bookingsystem.main;
 
@@ -40,6 +40,8 @@ public class Main {
 			// tryna figure this out
 			boolean rollback = false;
 			Command command = null;
+			String[] parts = line.split(" ", 3);
+            String cmd = parts[0];
 
 			try {
 				command = CommandParser.parse(line);
@@ -49,18 +51,23 @@ public class Main {
 
 			} catch (FlightBookingSystemException ex) {
 				System.out.println(ex.getMessage());
+				
 			} catch (IOException ex) {
 				// rollback code
 				rollback = true;
 
-			} finally {
-				if (rollback == true) {
+			} 
+			
+			if (rollback == true) {
+				if (cmd == "cancelbooking" || cmd == "editbooking") {
+					command.rollback(fbs, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+				} else {
 					command.rollback(fbs);
 				}
 			}
-
+			
 		}
-		// FlightBookingSystemData.store(fbs);
+		FlightBookingSystemData.store(fbs);
 		System.exit(0); 
 	}
 }

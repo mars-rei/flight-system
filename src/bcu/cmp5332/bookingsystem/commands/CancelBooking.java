@@ -1,6 +1,8 @@
-// added - completed!
+// UNFINISHED
 
 package bcu.cmp5332.bookingsystem.commands;
+
+import java.time.LocalDate;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
@@ -46,11 +48,25 @@ public class CancelBooking implements Command {
     }
     
     @Override
-    public void rollback(FlightBookingSystem flightBookingSystem) {  
+    public void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {  
     	System.out.println("Error updating booking data.");
     	
-    	// idk how to retrieve this info unless we use a temporary file to store new changes instead
-        
+		try {
+			Customer bookingCustomer = flightBookingSystem.getCustomerByID(customerId);
+			Flight bookingFlight = flightBookingSystem.getFlightByID(flightId);
+	    	
+	    	// rollback will reset the booking date - so this method is still inaccurate
+	    	LocalDate bookedDate = flightBookingSystem.getSystemDate();
+	        
+	        Booking booking = new Booking(bookingCustomer, bookingFlight, bookedDate);
+	        bookingCustomer.addBooking(booking); 
+	        bookingFlight.addPassenger(bookingCustomer);
+	        flightBookingSystem.addBooking(booking);
+	        
+		} catch (FlightBookingSystemException e) {
+			System.out.println(e.getMessage());
+		}
+    	
 		System.out.println("Booking cancellation withdrawn.");
 		
     }

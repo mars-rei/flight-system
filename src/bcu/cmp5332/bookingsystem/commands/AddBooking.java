@@ -44,7 +44,6 @@ public class AddBooking implements Command {
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here
-    	
     	int maxId = 0;
         if (flightBookingSystem.getBookings().size() > 0) {
             int lastIndex = flightBookingSystem.getBookings().size() - 1;

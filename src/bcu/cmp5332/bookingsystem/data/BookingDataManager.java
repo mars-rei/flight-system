@@ -1,5 +1,3 @@
-// completed
-
 package bcu.cmp5332.bookingsystem.data;
 
 import bcu.cmp5332.bookingsystem.commands.AddBooking;
@@ -35,9 +33,10 @@ public class BookingDataManager implements DataManager {
                 String line = sc.nextLine();
                 String[] properties = line.split(SEPARATOR, -1);
                 try {
-                	int customerId = Integer.parseInt(properties[0]);
-                	int flightId = Integer.parseInt(properties[1]);
-                    LocalDate bookingDate = LocalDate.parse(properties[2]);
+                	int id = Integer.parseInt(properties[0]);
+                	int customerId = Integer.parseInt(properties[1]);
+                	int flightId = Integer.parseInt(properties[2]);
+                    LocalDate bookingDate = LocalDate.parse(properties[3]);
                     
                     AddBooking initialiseBooking = new AddBooking(customerId, flightId, bookingDate);
                     initialiseBooking.execute(fbs); // make sure booking is added to customer and passenger
@@ -59,12 +58,13 @@ public class BookingDataManager implements DataManager {
         // TODO: implementation here
     	
     	// test: changing to read-only
-    	File bookingFile = new File(RESOURCE);
-    	bookingFile.setReadOnly();
+    	// File bookingFile = new File(RESOURCE);
+    	// bookingFile.setReadOnly();
     	// would also need to change RESOURCE below to bookingFile
     	
-    	try (PrintWriter out = new PrintWriter(new FileWriter(bookingFile))) {
+    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
             for (Booking booking : fbs.getBookings()) { 
+            	out.print(booking.getId() + SEPARATOR);
                 out.print(booking.getCustomer().getId() + SEPARATOR);
                 out.print(booking.getFlight().getId() + SEPARATOR);
                 out.print(booking.getBookingDate() + SEPARATOR);

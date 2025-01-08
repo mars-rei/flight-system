@@ -1,5 +1,3 @@
-// given - completed
-
 package bcu.cmp5332.bookingsystem.data;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -57,11 +55,11 @@ public class FlightDataManager implements DataManager {
     public void storeData(FlightBookingSystem fbs) throws IOException {
     	
     	// test: changing to read-only
-    	File flightFile = new File(RESOURCE);
-    	flightFile.setReadOnly();
+    	// File flightFile = new File(RESOURCE);
+    	// flightFile.setReadOnly();
     	// would also need to change RESOURCE below to flightFile
     	
-    	try (PrintWriter out = new PrintWriter(new FileWriter(flightFile))) {
+    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
             for (Flight flight : fbs.getFlights()) {
                 out.print(flight.getId() + SEPARATOR);
                 out.print(flight.getFlightNumber() + SEPARATOR);

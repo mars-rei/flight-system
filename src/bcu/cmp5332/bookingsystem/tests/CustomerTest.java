@@ -24,7 +24,7 @@ class CustomerTest {
 	void setUp() {
 		customer = new Customer(1, "John Doe", "07555555555", "johndoe@example.com");
 		flight = new Flight(1, "LH2560", "Birmingham", "Munich", LocalDate.parse("2024-11-11"), 100, 50.0);
-		booking = new Booking(customer, flight, LocalDate.now());
+		booking = new Booking(1, customer, flight, LocalDate.now());
 		fbs = new FlightBookingSystem();
 	}
 
@@ -43,7 +43,7 @@ class CustomerTest {
 
 	@Test 
 	void addDuplicateBooking() throws FlightBookingSystemException {
-		Booking booking = new Booking(customer, flight, LocalDate.now());
+		Booking booking = new Booking(1, customer, flight, LocalDate.now());
 		customer.addBooking(booking);
 		
 		Exception exception = assertThrows(FlightBookingSystemException.class, () -> {

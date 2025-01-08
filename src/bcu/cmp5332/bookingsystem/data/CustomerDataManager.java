@@ -1,5 +1,3 @@
-// completed
-
 package bcu.cmp5332.bookingsystem.data;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -56,11 +54,11 @@ public class CustomerDataManager implements DataManager {
     	// TODO: implementation here
     	
     	// test: changing to read-only
-    	File customerFile = new File(RESOURCE);
-    	customerFile.setReadOnly();
+    	// File customerFile = new File(RESOURCE);
+    	// customerFile.setReadOnly();
     	// would also need to change RESOURCE below to customerFile
     	
-    	try (PrintWriter out = new PrintWriter(new FileWriter(customerFile))) {
+    	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
     		for (Customer customer : fbs.getCustomers()) {
     			out.print(customer.getId() + SEPARATOR);
     			out.print(customer.getName() + SEPARATOR);

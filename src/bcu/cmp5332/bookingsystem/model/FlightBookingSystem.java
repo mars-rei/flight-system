@@ -15,7 +15,7 @@ public class FlightBookingSystem {
     
     private final Map<Integer, Customer> customers = new TreeMap<>();
     private final Map<Integer, Flight> flights = new TreeMap<>();
-    private final List<Booking> bookings = new ArrayList<>(); // added even if not specified
+    private final Map<Integer, Booking> bookings = new TreeMap<>(); // added even if not specified
 
     /**
      * Returns the system date
@@ -50,7 +50,8 @@ public class FlightBookingSystem {
      * To implement
      */
     public List<Booking> getBookings() { // added even though not specified 
-    	return Collections.unmodifiableList(bookings);
+    	List<Booking> out = new ArrayList<>(bookings.values());
+    	return Collections.unmodifiableList(out);
     }
 
     /**
@@ -80,6 +81,19 @@ public class FlightBookingSystem {
             throw new FlightBookingSystemException("There is no customer with that ID.");
         }
         return customers.get(id);
+    }
+    
+    /**
+     * Finds and returns a booking using the booking id
+     * 
+     * @throws FlightBookingSystemException thrown when there is no booking with the given id in the system
+     */
+    public Booking getBookingByID(int id) throws FlightBookingSystemException {
+        // TODO: implementation here
+    	if (!bookings.containsKey(id)) {
+            throw new FlightBookingSystemException("There is no booking with that ID.");
+        }
+        return bookings.get(id);
     }
 
     /**
@@ -113,9 +127,6 @@ public class FlightBookingSystem {
 
     /**
      * Adds customer to flight booking system
-     * 
-     * To implement
-     * 
      * @throws FlightBookingSystemException thrown when there is already a customer
      *  in the system with the same email
      */
@@ -142,16 +153,20 @@ public class FlightBookingSystem {
     /**
      * Adds booking to flight booking system
      * 
-     * To implement
-     * 
      * @throws FlightBookingSystemException thrown when there is already a booking 
      * in the system with the same customer and flight 
      */
     public void addBooking(Booking booking) throws FlightBookingSystemException { // added even though not specified
-    	if (bookings.contains(booking)) {
-    		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
-    	}
-    	bookings.add(booking);
+    	if (bookings.containsKey(booking.getId())) {
+            throw new IllegalArgumentException("Duplicate booking ID.");
+        }
+    	for (Booking existing : bookings.values()) {
+            if (existing.getCustomer().equals(booking.getCustomer())
+            		&& existing.getFlight().equals(booking.getFlight())) {
+                throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
+            }
+        }
+    	bookings.put(booking.getId(), booking);
     }
     
     /**
@@ -165,17 +180,16 @@ public class FlightBookingSystem {
     public void cancelBooking(Customer customer, Flight flight) throws FlightBookingSystemException { // added even though not specified
     	// finds booking that matches the customer and flight
     	Booking bookingFound = null;
-        for (Booking existing : bookings) {
+        for (Booking existing : bookings.values()) {
             if (existing.getCustomer() == customer && existing.getFlight() == flight) {
             	bookingFound = existing;
             }
         }
         
         if (bookingFound != null) {
-        	bookings.remove(bookingFound);
+        	bookings.remove(bookingFound.getId(), bookingFound);
         } else {
         	throw new FlightBookingSystemException("There is no booking with this customer and flight in the system");
         }
-    	
     }
 }

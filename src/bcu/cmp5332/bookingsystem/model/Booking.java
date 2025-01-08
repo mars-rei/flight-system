@@ -9,6 +9,7 @@ import java.time.LocalDate;
  */
 public class Booking {
     
+	private int id;
     private Customer customer;
     private Flight flight;
     private LocalDate bookingDate;
@@ -16,20 +17,37 @@ public class Booking {
     /**
      * Represents the booking class constructor
      * 
+     * @param id the id of the booking (int)
+     * 
      * @param customer the customer who did the booking (customer object)
      * 
      * @param flight the flight the customer booked (flight object)
      * 
      * @param bookingDate the date the flight was booked (local date)
      */
-    public Booking(Customer customer, Flight flight, LocalDate bookingDate) {
+    public Booking(int id, Customer customer, Flight flight, LocalDate bookingDate) {
         // TODO: implementation here
+    	this.id = id;
     	this.customer = customer;
         this.flight = flight;
         this.bookingDate = bookingDate;
     }
     
     // TODO: implementation of Getter and Setter methods
+    
+    /**
+     * Returns the booking id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets the booking id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
     
     /**
      * Returns the customer object
@@ -71,5 +89,13 @@ public class Booking {
      */
     public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
+    }
+    
+    // added
+    /**
+     * Returns the booking details in short form
+     */
+    public String getDetailsShort() {
+        return "Booking #" + getId() + " - " + getCustomer().getName() + " - " + getFlight().getFlightNumber() + " - " + getBookingDate();
     }
 }

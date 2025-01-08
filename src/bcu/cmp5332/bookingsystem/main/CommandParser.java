@@ -13,7 +13,10 @@ import bcu.cmp5332.bookingsystem.commands.CancelBooking;
 import bcu.cmp5332.bookingsystem.commands.AddBooking;
 import bcu.cmp5332.bookingsystem.commands.AddCustomer;
 import bcu.cmp5332.bookingsystem.commands.Command;
+import bcu.cmp5332.bookingsystem.commands.EditBooking;
 import bcu.cmp5332.bookingsystem.commands.Help;
+import bcu.cmp5332.bookingsystem.commands.ListBookings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,7 +45,7 @@ public class CommandParser {
             String cmd = parts[0];
 
             
-            if (cmd.equals("addflight")) { // add flight command - given
+            if (cmd.equals("addflight")) { 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.print("Flight Number: ");
                 String flightNumber = reader.readLine();
@@ -60,7 +63,7 @@ public class CommandParser {
 
                 return new AddFlight(flightNumber, origin, destination, departureDate, capacity, price);
                 
-            } else if (cmd.equals("addcustomer")) { // add customer command - to complete - done!
+            } else if (cmd.equals("addcustomer")) { 
             	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.print("Name: ");
                 String name = reader.readLine();
@@ -71,27 +74,30 @@ public class CommandParser {
                 
                 return new AddCustomer(name, phone, email);
                 
-            } else if (cmd.equals("loadgui")) { // load gui command - given
+            } else if (cmd.equals("loadgui")) {
                 return new LoadGUI();
                 
             } else if (parts.length == 1) {
-                if (line.equals("listflights")) { // list flights command - given
+                if (line.equals("listflights")) { 
                     return new ListFlights();
                     
-                } else if (line.equals("listcustomers")) { // list customers command - to complete - done!
+                } else if (line.equals("listcustomers")) { 
                 	return new ListCustomers();
                     
-                } else if (line.equals("help")) { // help command - given
+                } else if (line.equals("listbookings")) { 
+                	return new ListBookings();
+                	
+                } else if (line.equals("help")) {
                     return new Help();
                 }
                 
             } else if (parts.length == 2) {
                 int id = Integer.parseInt(parts[1]);
 
-                if (cmd.equals("showflight")) { // show flight command - to complete
+                if (cmd.equals("showflight")) { 
                 	return new ShowFlight(id);
                     
-                } else if (cmd.equals("showcustomer")) { // show customer command - to complete
+                } else if (cmd.equals("showcustomer")) { 
                 	return new ShowCustomer(id);
                 }
                 
@@ -99,18 +105,23 @@ public class CommandParser {
             	int customerId = Integer.parseInt(parts[1]);
             	int flightId = Integer.parseInt(parts[2]);
             	
-                if (cmd.equals("addbooking")) { // add booking command - to complete done!
+                if (cmd.equals("addbooking")) { 
                 	return new AddBooking(customerId, flightId, null);
                     
-                } else if (cmd.equals("editbooking")) { // edit booking command - to complete
-                	// not included in commands yet - need to add EditBooking class to commands package!!
-                    
-                	
-                } else if (cmd.equals("cancelbooking")) { // edit cancel booking command - to complete - done!
+                } else if (cmd.equals("cancelbooking")) { 
                 	return new CancelBooking(customerId, flightId);
+                	
+                } else if (cmd.equals("editbooking")) { // edit booking command - to complete
+                	int bookingId = Integer.parseInt(parts[1]);
+                	return new EditBooking(bookingId, flightId);
+                	
                 }
-            }
-        } catch (NumberFormatException ex) { // completed
+                
+            } 
+            
+            
+            
+        } catch (NumberFormatException ex) { 
         	throw new FlightBookingSystemException("Unable to parse id.");
         }
 

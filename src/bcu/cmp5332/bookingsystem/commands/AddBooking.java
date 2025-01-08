@@ -44,6 +44,13 @@ public class AddBooking implements Command {
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         // TODO: implementation here
+    	
+    	int maxId = 0;
+        if (flightBookingSystem.getBookings().size() > 0) {
+            int lastIndex = flightBookingSystem.getBookings().size() - 1;
+            maxId = flightBookingSystem.getBookings().get(lastIndex).getId();
+        }
+        
     	Customer customer = flightBookingSystem.getCustomerByID(customerId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
     	
@@ -53,14 +60,14 @@ public class AddBooking implements Command {
     	} else { // if booking is added by booking data manager (solves date booked overriding)
     		bookedDate = bookingDate; 
     	}
-        
-        Booking booking = new Booking(customer, flight, bookedDate);
+
+        Booking booking = new Booking(++maxId, customer, flight, bookedDate);
+        flightBookingSystem.addBooking(booking);
         customer.addBooking(booking); 
         flight.addPassenger(customer);
-        flightBookingSystem.addBooking(booking);
         
         if (bookingDate == null) { // only prints message if booking made by user
-            System.out.println("Booking issued succesfully.");
+        	System.out.println("Booking #" + booking.getId() + " added.");
     	} 
     }
     

@@ -1,4 +1,4 @@
-// UNFINISHED
+// UNFINISHED - NEED TO EDIT AFTER FINISHING ADD BOOKING
 
 package bcu.cmp5332.bookingsystem.commands;
 
@@ -47,7 +47,7 @@ public class CancelBooking implements Command {
         System.out.println("Booking was cancelled succesfully.");
     }
     
-    @Override
+    @Override // TODO
     public void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {  
     	System.out.println("Error updating booking data.");
     	
@@ -58,7 +58,10 @@ public class CancelBooking implements Command {
 	    	// rollback will reset the booking date - so this method is still inaccurate
 	    	LocalDate bookedDate = flightBookingSystem.getSystemDate();
 	        
-	        Booking booking = new Booking(bookingCustomer, bookingFlight, bookedDate);
+	    	int lastIndex = flightBookingSystem.getBookings().size() - 1;
+            int maxId = flightBookingSystem.getBookings().get(lastIndex).getId();
+	    	
+	        Booking booking = new Booking(++maxId, bookingCustomer, bookingFlight, bookedDate);
 	        bookingCustomer.addBooking(booking); 
 	        bookingFlight.addPassenger(bookingCustomer);
 	        flightBookingSystem.addBooking(booking);

@@ -160,13 +160,27 @@ public class FlightBookingSystem {
     	if (bookings.containsKey(booking.getId())) {
             throw new IllegalArgumentException("Duplicate booking ID.");
         }
+    	
     	for (Booking existing : bookings.values()) {
             if (existing.getCustomer().equals(booking.getCustomer())
             		&& existing.getFlight().equals(booking.getFlight())) {
                 throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
             }
         }
+    	
+    	if (booking.getFlight().getPassengers().size() == booking.getFlight().getCapacity()) {
+    		throw new FlightBookingSystemException("This flight has reached its capacity. Booking unsuccessful.");
+    	}
+    	
     	bookings.put(booking.getId(), booking);
+    }
+    
+    // TODO
+    public void editBooking(Flight newFlight) throws FlightBookingSystemException { // added even though not specified
+    	// if user tries to update booking to a full flight
+    	if (newFlight.getPassengers().size() == newFlight.getCapacity()) {
+    		throw new FlightBookingSystemException("This flight has reached its capacity. Booking unsuccessful.");
+    	}
     }
     
     /**

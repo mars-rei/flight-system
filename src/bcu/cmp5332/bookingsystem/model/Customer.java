@@ -1,5 +1,3 @@
-// given - to complete
-
 package bcu.cmp5332.bookingsystem.model;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -16,7 +14,8 @@ public class Customer {
     private String name;
     private String phone;
     private String email;
-    private final List<Booking> bookings;;
+    private final List<Booking> bookings;
+    private boolean isDeleted;
     
     /**
      * Represents the customer class constructor
@@ -28,20 +27,18 @@ public class Customer {
      * @param phone the customer's phone number (string)
      * 
      * @param email the customer's email (string)
+     *  
+     * @param isDeleted whether the customer has been deleted (boolean)
      */
-    
-    // TODO: implement constructor here
-    
-    public Customer(int id, String name, String phone, String email) {
+    public Customer(int id, String name, String phone, String email, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.isDeleted = isDeleted;
         
         bookings = new ArrayList<>();
     }
-    
-    // TODO: implementation of Getter and Setter methods
     
     /**
      * Returns the customer id
@@ -97,6 +94,20 @@ public class Customer {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    /**
+     * Returns the customer status
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * Sets the customer status
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
     
     /**

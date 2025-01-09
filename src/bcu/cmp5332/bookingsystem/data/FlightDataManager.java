@@ -37,7 +37,8 @@ public class FlightDataManager implements DataManager {
                     LocalDate departureDate = LocalDate.parse(properties[4]);
                     int capacity = Integer.parseInt(properties[5]);
                     double price = Double.parseDouble(properties[6]);
-                    Flight flight = new Flight(id, flightNumber, origin, destination, departureDate, capacity, price);
+                    boolean isDeleted = Boolean.parseBoolean(properties[7]);
+                    Flight flight = new Flight(id, flightNumber, origin, destination, departureDate, capacity, price, isDeleted);
                     fbs.addFlight(flight);
                 } catch (NumberFormatException ex) {
                     throw new FlightBookingSystemException("Unable to parse input on line " + line_idx
@@ -54,11 +55,6 @@ public class FlightDataManager implements DataManager {
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
     	
-    	// test: changing to read-only
-    	// File flightFile = new File(RESOURCE);
-    	// flightFile.setReadOnly();
-    	// would also need to change RESOURCE below to flightFile
-    	
     	try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
             for (Flight flight : fbs.getFlights()) {
                 out.print(flight.getId() + SEPARATOR);
@@ -68,6 +64,7 @@ public class FlightDataManager implements DataManager {
                 out.print(flight.getDepartureDate() + SEPARATOR);
                 out.print(flight.getCapacity() + SEPARATOR);
                 out.print(flight.getPrice() + SEPARATOR);
+                out.print(flight.getIsDeleted() + SEPARATOR);
                 out.println();
             }
         }

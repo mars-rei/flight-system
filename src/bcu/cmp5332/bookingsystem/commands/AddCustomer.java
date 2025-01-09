@@ -1,5 +1,3 @@
-// completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import java.io.IOException;
@@ -47,11 +45,12 @@ public class AddCustomer implements Command {
             maxId = flightBookingSystem.getCustomers().get(lastIndex).getId();
         }
         
-        Customer customer = new Customer(++maxId, name, phone, email);
+        Customer customer = new Customer(++maxId, name, phone, email, false);
         flightBookingSystem.addCustomer(customer);
     	System.out.println("Customer #" + customer.getId() + " added.");
     }
     
+    /*
     @Override
     public void rollback(FlightBookingSystem flightBookingSystem) {  
     	System.out.println("Error storing new customer data.");
@@ -67,6 +66,6 @@ public class AddCustomer implements Command {
 		} catch (FlightBookingSystemException e) {
 			System.out.println(e.getMessage());
 		}
-       
     }
+    */
 }

@@ -1,5 +1,3 @@
-// added - completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -29,8 +27,10 @@ public class ShowCustomer implements Command {
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        // TODO: implementation here
     	Customer customer = flightBookingSystem.getCustomerByID(id);
     	System.out.println(customer.getDetailsLong()); 
+    	if (customer.getIsDeleted() == true) {
+    		System.out.println("This customer has been deleted.");
+    	}
     }
 }

@@ -70,6 +70,7 @@ public class AddBooking implements Command {
     	} 
     }
     
+    /*
     @Override
     public void rollback(FlightBookingSystem flightBookingSystem) {  
     	System.out.println("Error storing new booking data.");
@@ -89,4 +90,5 @@ public class AddBooking implements Command {
 		System.out.println("Booking addition withdrawn.");
        
     }
+    */
 }

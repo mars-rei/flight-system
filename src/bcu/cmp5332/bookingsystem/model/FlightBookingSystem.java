@@ -122,7 +122,11 @@ public class FlightBookingSystem {
      * Removes flight from flight booking system
      */
     public void removeFlight(Flight flight){
-    	flights.remove(flight.getId(), flight);
+    	// original code to fully delete the flight from the fbs
+    	// flights.remove(flight.getId(), flight);
+    	
+    	// new code to hide deleted flights
+    	flight.setIsDeleted(true);
     }
 
     /**
@@ -131,7 +135,6 @@ public class FlightBookingSystem {
      *  in the system with the same email
      */
     public void addCustomer(Customer customer) throws FlightBookingSystemException {
-        // TODO: implementation here
     	if (customers.containsKey(customer.getId())) {
             throw new IllegalArgumentException("Duplicate customer ID.");
         }
@@ -147,7 +150,11 @@ public class FlightBookingSystem {
      * Removes customer from flight booking system
      */
     public void removeCustomer(Customer customer){
-    	customers.remove(customer.getId(), customer);
+    	// original code to fully delete the customer from the fbs
+    	// customers.remove(customer.getId(), customer);
+    	
+    	// new code to hide deleted customers
+    	customer.setIsDeleted(true);
     }
     
     /**

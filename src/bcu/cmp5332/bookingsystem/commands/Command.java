@@ -17,6 +17,8 @@ public interface Command {
         + "\taddcustomer                               add a new customer\n"
         + "\tshowflight [flight id]                    show flight details\n"
         + "\tshowcustomer [customer id]                show customer details\n"
+        + "\tremoveflight [flight id]                  remove flight\n" // added
+        + "\tremovecustomer [customer id]              remove customer \n" // added
         + "\taddbooking [customer id] [flight id]      add a new booking\n"
         + "\tcancelbooking [customer id] [flight id]   cancel a booking\n"
         + "\teditbooking [booking id] [flight id]      update a booking\n" 
@@ -33,6 +35,7 @@ public interface Command {
 	 */
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
     
+    /*
     default void rollback(FlightBookingSystem flightBookingSystem) {
     	// default is empty as this only affects commands that update the state of the system
     }
@@ -40,5 +43,6 @@ public interface Command {
     default void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {
     	// default is empty as this only affects the editbooking and cancelbooking commands
     }
+    */
     
 }

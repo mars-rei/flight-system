@@ -1,5 +1,3 @@
-// added
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -21,9 +19,18 @@ public class ListBookings implements Command {
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         List<Booking> bookings = flightBookingSystem.getBookings();
+        
+        // for if the customer or flight has been removed
+        int invalidBookings = 0;
+        
         for (Booking booking : bookings) {
-            System.out.println(booking.getDetailsShort());
+        	if (booking.getCustomer().getIsDeleted() == false 
+        			&& booking.getFlight().getIsDeleted() == false) {
+        		System.out.println(booking.getDetailsShort());
+        	} else {
+        		++invalidBookings;
+        	}
         }
-        System.out.println(bookings.size() + " booking(s)");
+        System.out.println((bookings.size() - invalidBookings) + " booking(s)");
     }
 }

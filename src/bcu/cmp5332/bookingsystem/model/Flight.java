@@ -1,5 +1,3 @@
-// given - to complete
-
 package bcu.cmp5332.bookingsystem.model;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -22,6 +20,7 @@ public class Flight {
     private LocalDate departureDate;
     private int capacity;
     private double price;
+    private boolean isDeleted;
 
     private final Set<Customer> passengers;
 
@@ -41,9 +40,11 @@ public class Flight {
      * @param capacity the number of seats in the flight (int)
      * 
      * @param price the price of the flight (double)
+     * 
+     * @param isDeleted whether the flight has been deleted (boolean)
      */
     public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate,
-    		int capacity, double price) {
+    		int capacity, double price, boolean isDeleted) {
         this.id = id;
         this.flightNumber = flightNumber;
         this.origin = origin;
@@ -51,6 +52,7 @@ public class Flight {
         this.departureDate = departureDate;
         this.capacity = capacity;
         this.price = price;
+        this.isDeleted = isDeleted;
         
         passengers = new HashSet<>();
     }
@@ -154,6 +156,20 @@ public class Flight {
     }
     
     /**
+     * Returns the flight status
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * Sets the flight status
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+    
+    /**
      * Returns the flight passengers
      */
     public List<Customer> getPassengers() {
@@ -165,18 +181,17 @@ public class Flight {
      */
     public String getDetailsShort() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-        return "Flight #" + id + " - " + flightNumber + " - " + origin + " to " 
-                + destination + " on " + departureDate.format(dtf);
+        return "Flight #" + getId() + " - " + getFlightNumber() + " - " + getOrigin() + " to " 
+                + getDestination() + " on " + getDepartureDate().format(dtf);
     }
 
     /**
      * Returns the flight details in a long format
      */
     public String getDetailsLong() {
-        // TODO: implementation here
-    	String longDetails = "Flight #" + id + "\nFlight No: " + flightNumber + "\nOrigin: " + origin
-    			+ "\nDestination: " + destination + "\nDeparture Date: " + departureDate + 
-    			"\nNumber of seats: " + capacity + "\nPrice: £" + price + 
+    	String longDetails = "Flight #" + getId() + "\nFlight No: " + getFlightNumber() + "\nOrigin: " + getOrigin()
+    			+ "\nDestination: " + getDestination() + "\nDeparture Date: " + getDepartureDate() + 
+    			"\nNumber of seats: " + getCapacity() + "\nPrice: £" + getPrice() + 
     			"\n---------------" + "\nPassengers:";
     	for (Customer passenger: getPassengers()) {
     		longDetails += "\n * Id: ";
@@ -184,7 +199,7 @@ public class Flight {
     		longDetails += passenger.getName() + " - ";
     		longDetails += passenger.getPhone();
     	}
-    	longDetails += "\n" + passengers.size() + " passenger(s)";
+    	longDetails += "\n" + getPassengers().size() + " passenger(s)";
     	return longDetails;
     }
     
@@ -194,8 +209,7 @@ public class Flight {
      * @throws FlightBookingSystemException thrown when there is an error
      */
     public void addPassenger(Customer passenger) throws FlightBookingSystemException {
-    	// TODO: implementation here   
-    	if (passengers.contains(passenger)) {
+    	if (getPassengers().contains(passenger)) {
     		throw new FlightBookingSystemException("This passenger is already on this flight.");
     	} else {
     		passengers.add(passenger);
@@ -208,8 +222,7 @@ public class Flight {
      * @throws FlightBookingSystemException thrown when there is an error
      */
     public void removePassenger(Customer passenger) throws FlightBookingSystemException {
-    	// TODO: implementation here       	
-    	if (passengers.contains(passenger)) {
+    	if (getPassengers().contains(passenger)) {
     		passengers.remove(passenger);
     	} else {
     		throw new FlightBookingSystemException("This passenger is not on this flight.");

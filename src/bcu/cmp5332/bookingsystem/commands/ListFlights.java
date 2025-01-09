@@ -1,5 +1,3 @@
-// given - completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -20,10 +18,14 @@ public class ListFlights implements Command {
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        List<Flight> flights = flightBookingSystem.getFlights();
-        for (Flight flight : flights) {
-            System.out.println(flight.getDetailsShort());
+        List<Flight> allFlights = flightBookingSystem.getFlights();
+        int notHiddenFlights = 0;
+        for (Flight flight : allFlights) {
+        	if (flight.getIsDeleted() == false) {
+        		System.out.println(flight.getDetailsShort());
+        		++notHiddenFlights;
+        	} 
         }
-        System.out.println(flights.size() + " flight(s)");
+        System.out.println(notHiddenFlights + " flight(s)");
     }
 }

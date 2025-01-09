@@ -58,6 +58,7 @@ public class Main {
 
 			} 
 			
+			/*
 			if (rollback == true) {
 				if (cmd == "cancelbooking" || cmd == "editbooking") {
 					command.rollback(fbs, Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
@@ -65,6 +66,9 @@ public class Main {
 					command.rollback(fbs);
 				}
 			}
+			*/
+			
+			System.out.println();
 			
 		}
 		FlightBookingSystemData.store(fbs);

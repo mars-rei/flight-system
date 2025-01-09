@@ -47,6 +47,7 @@ public class CancelBooking implements Command {
         System.out.println("Booking was cancelled succesfully.");
     }
     
+    /*
     @Override // TODO
     public void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {  
     	System.out.println("Error updating booking data.");
@@ -73,4 +74,5 @@ public class CancelBooking implements Command {
 		System.out.println("Booking cancellation withdrawn.");
 		
     }
+    */
 }

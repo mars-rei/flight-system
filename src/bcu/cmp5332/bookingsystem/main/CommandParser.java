@@ -4,6 +4,8 @@
 package bcu.cmp5332.bookingsystem.main;
 
 import bcu.cmp5332.bookingsystem.commands.LoadGUI;
+import bcu.cmp5332.bookingsystem.commands.RemoveCustomer;
+import bcu.cmp5332.bookingsystem.commands.RemoveFlight;
 import bcu.cmp5332.bookingsystem.commands.ShowCustomer;
 import bcu.cmp5332.bookingsystem.commands.ShowFlight;
 import bcu.cmp5332.bookingsystem.commands.ListFlights;
@@ -99,6 +101,12 @@ public class CommandParser {
                     
                 } else if (cmd.equals("showcustomer")) { 
                 	return new ShowCustomer(id);
+                	
+                } else if (cmd.equals("removeflight")) { 
+                	return new RemoveFlight(id);
+                	
+                } else if (cmd.equals("removecustomer")) { 
+                	return new RemoveCustomer(id);
                 }
                 
             } else if (parts.length == 3) {
@@ -116,10 +124,8 @@ public class CommandParser {
                 	return new EditBooking(bookingId, flightId);
                 	
                 }
-                
+   
             } 
-            
-            
             
         } catch (NumberFormatException ex) { 
         	throw new FlightBookingSystemException("Unable to parse id.");

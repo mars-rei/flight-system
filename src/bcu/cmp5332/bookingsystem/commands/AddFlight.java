@@ -1,5 +1,3 @@
-// given -  completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
@@ -24,7 +22,6 @@ public class AddFlight implements  Command {
     private final LocalDate departureDate;
     private final int capacity;
     private final double price;
-
     
     /**
      * Represents the addFlight command constructor
@@ -62,12 +59,13 @@ public class AddFlight implements  Command {
             maxId = flightBookingSystem.getFlights().get(lastIndex).getId();
         }
         
-        Flight flight = new Flight(++maxId, flightNumber, origin, destination, departureDate, capacity, price);
+        Flight flight = new Flight(++maxId, flightNumber, origin, destination, departureDate, capacity, price, false);
         flightBookingSystem.addFlight(flight);
     	System.out.println("Flight #" + flight.getId() + " added.");
    
     }
     
+    /*
     @Override
     public void rollback(FlightBookingSystem flightBookingSystem) {  
     	System.out.println("Error storing new flight data.");
@@ -83,6 +81,6 @@ public class AddFlight implements  Command {
 		} catch (FlightBookingSystemException e) {
 			System.out.println(e.getMessage());
 		}
-       
     }
+    */
 }

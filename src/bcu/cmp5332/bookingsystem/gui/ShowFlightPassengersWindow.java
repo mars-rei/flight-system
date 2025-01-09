@@ -1,5 +1,3 @@
-// given - to complete - need to add more javadoc comments later
-
 package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -18,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+/**
+ * Allows the user to view a flight's passengers via input in the GUi
+ */
 public class ShowFlightPassengersWindow extends JFrame implements ActionListener {
 	
     private MainWindow mw;
@@ -81,12 +82,15 @@ public class ShowFlightPassengersWindow extends JFrame implements ActionListener
 
     }
     
+    
+    /**
+     * Shows a flight's passengers in the GUI
+     */
     private void showFlightPassengers() throws FlightBookingSystemException { 
         int flight = Integer.parseInt(flightText.getText());
 
 		// refresh the view with the list of flight passengers
 		mw.displayPassengers(flight);
-		// hide (close) the AddCustomerWindow
 		this.setVisible(false);
 
     }

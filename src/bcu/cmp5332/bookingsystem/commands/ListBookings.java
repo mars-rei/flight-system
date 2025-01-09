@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents the listBookings command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class ListBookings implements Command {
 
@@ -20,17 +20,19 @@ public class ListBookings implements Command {
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         List<Booking> bookings = flightBookingSystem.getBookings();
         
-        // for if the customer or flight has been removed
+        // for if the customer or flight has been removed or the booking has been completed
         int invalidBookings = 0;
         
         for (Booking booking : bookings) {
-        	if (booking.getCustomer().getIsDeleted() == false 
-        			&& booking.getFlight().getIsDeleted() == false) {
+        	if ((booking.getCustomer().getIsDeleted() == false 
+        			&& booking.getFlight().getIsDeleted() == false)
+        			&& booking.getFlight().getDepartureDate().isAfter(flightBookingSystem.getSystemDate())) {
         		System.out.println(booking.getDetailsShort());
         	} else {
         		++invalidBookings;
         	}
         }
+        
         System.out.println((bookings.size() - invalidBookings) + " booking(s)");
     }
 }

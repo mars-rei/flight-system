@@ -1,5 +1,3 @@
-// given - completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -17,6 +15,7 @@ public interface Command {
         + "\taddcustomer                               add a new customer\n"
         + "\tshowflight [flight id]                    show flight details\n"
         + "\tshowcustomer [customer id]                show customer details\n"
+        + "\tshowbooking [booking id]                  show booking details\n"
         + "\tremoveflight [flight id]                  remove flight\n" // added
         + "\tremovecustomer [customer id]              remove customer \n" // added
         + "\taddbooking [customer id] [flight id]      add a new booking\n"

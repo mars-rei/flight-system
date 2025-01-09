@@ -1,8 +1,5 @@
 package bcu.cmp5332.bookingsystem.commands;
 
-import java.io.IOException;
-
-import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -10,7 +7,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the addCustomer command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class AddCustomer implements Command {
 
@@ -19,13 +16,13 @@ public class AddCustomer implements Command {
     private final String email;
 
     /**
-     * Represents the addCustomer command constructor
+     * Initialises the AddCustomer object
      * 
-     * @param name customer name (string)
+     * @param name the customer's name (string)
      * 
-     * @param phone customer phone number (string)
+     * @param phone the customer's phone number (string)
      * 
-     * @param email customer email address (string)
+     * @param email the customer's email address (string)
      */
     public AddCustomer(String name, String phone, String email) {
         this.name = name;
@@ -38,7 +35,6 @@ public class AddCustomer implements Command {
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        // TODO: implementation here
     	int maxId = 0;
         if (flightBookingSystem.getCustomers().size() > 0) {
             int lastIndex = flightBookingSystem.getCustomers().size() - 1;

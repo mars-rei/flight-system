@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * Represents a customer data manager 
  * 
- * implements the interface DataManager
+ * Implements the interface DataManager
  */
 public class CustomerDataManager implements DataManager {
 
@@ -24,7 +24,6 @@ public class CustomerDataManager implements DataManager {
 	 */
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
-        // TODO: implementation here
     	try (Scanner sc = new Scanner(new File(RESOURCE))) {
             int line_idx = 1;
             while (sc.hasNextLine()) {

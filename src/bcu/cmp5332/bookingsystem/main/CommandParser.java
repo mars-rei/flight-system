@@ -1,11 +1,9 @@
-// given - to complete
-// complete parse method to return all appropriate command objects based on user input
-
 package bcu.cmp5332.bookingsystem.main;
 
 import bcu.cmp5332.bookingsystem.commands.LoadGUI;
 import bcu.cmp5332.bookingsystem.commands.RemoveCustomer;
 import bcu.cmp5332.bookingsystem.commands.RemoveFlight;
+import bcu.cmp5332.bookingsystem.commands.ShowBooking;
 import bcu.cmp5332.bookingsystem.commands.ShowCustomer;
 import bcu.cmp5332.bookingsystem.commands.ShowFlight;
 import bcu.cmp5332.bookingsystem.commands.ListFlights;
@@ -32,8 +30,6 @@ public class CommandParser {
     
 	/**
 	 * Takes in the command the user inputs and parses it, calling the correct command interface based on that input
-	 * 
-	 * to complete
 	 * 
 	 * @param line the user's input
 	 * 
@@ -101,6 +97,9 @@ public class CommandParser {
                     
                 } else if (cmd.equals("showcustomer")) { 
                 	return new ShowCustomer(id);
+                	
+                } else if (cmd.equals("showbooking")) { 
+                	return new ShowBooking(id);
                 	
                 } else if (cmd.equals("removeflight")) { 
                 	return new RemoveFlight(id);

@@ -25,7 +25,7 @@ public class Flight {
     private final Set<Customer> passengers;
 
     /**
-     * Represents the flight class constructor
+     * Initialises the Flight object
      * 
      * @param id the flight's id (int)
      * 

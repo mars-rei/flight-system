@@ -7,14 +7,14 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the showFlight command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class ShowFlight implements Command {
 	
 	private int id;
 
     /**
-     * Represents the showFlight command constructor
+     * Initialises the ShowFlight object
      * 
      * @param id the flight's id (int)
      */

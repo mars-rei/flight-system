@@ -7,14 +7,14 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the removeFlight command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class RemoveFlight implements Command {
 	
 	private int id;
 
     /**
-     * Represents the removeFlight command constructor
+     * Initialises the RemoveFlight object
      * 
      * @param id the flight's id (int)
      */

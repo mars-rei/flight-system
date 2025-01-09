@@ -1,5 +1,3 @@
-// UNFINISHED
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -11,7 +9,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the editBooking command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class EditBooking implements Command {
 
@@ -19,7 +17,7 @@ public class EditBooking implements Command {
     private final int flightId;
 
     /**
-     * Represents the editBooking command constructor
+     * Initialises the EditBooking object
      * 
      * @param bookingId the booking's id (int)
      * 
@@ -33,9 +31,8 @@ public class EditBooking implements Command {
     /**
      * Executes the editBooking command
      */
-    @Override // TODO
+    @Override 
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        // TODO: implementation here
     	Booking booking = flightBookingSystem.getBookingByID(bookingId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
     	Flight oldFlight = booking.getFlight();

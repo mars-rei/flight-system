@@ -18,7 +18,7 @@ public class Customer {
     private boolean isDeleted;
     
     /**
-     * Represents the customer class constructor
+     * Initialises the Customer object
      * 
      * @param id the customer's id (int)
      * 
@@ -146,7 +146,6 @@ public class Customer {
      * Adds a customer booking
      */
     public void addBooking(Booking booking) throws FlightBookingSystemException { 
-        // TODO: implementation here
     	if (getBookings().contains(booking)) {
     		throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
     	} else {
@@ -158,7 +157,6 @@ public class Customer {
      * Cancels a customer booking
      */
     public void cancelBookingForFlight(Flight flight) throws FlightBookingSystemException {
-        // TODO: implementation here
     	Boolean found = false;
     	Booking bookingFound = null;
     	

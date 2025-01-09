@@ -5,7 +5,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the help command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class Help implements Command {
 

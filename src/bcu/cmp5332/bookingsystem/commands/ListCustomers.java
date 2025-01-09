@@ -9,23 +9,27 @@ import java.util.List;
 /**
  * Represents the listCustomers command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class ListCustomers implements Command {
 
-    /**
-     * Executes the listCustomers command
-     */
-    @Override
-    public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        List<Customer> allCustomers = flightBookingSystem.getCustomers();
-        int notHiddenCustomers = 0;
-        for (Customer customer : allCustomers) {
-        	if (customer.getIsDeleted() == false) {
-        		System.out.println(customer.getDetailsShort()); 
-        		++notHiddenCustomers;
-        	}
-        }
-        System.out.println(notHiddenCustomers + " customer(s)");
-    }
+	/**
+	 * Executes the listCustomers command
+	 */
+	@Override
+	public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
+		List<Customer> allCustomers = flightBookingSystem.getCustomers();
+		
+		// getting only valid customers
+		int notHiddenCustomers = 0;
+		
+		for (Customer customer : allCustomers) {
+			if (customer.getIsDeleted() == false) {
+				System.out.println(customer.getDetailsShort()); 
+				++notHiddenCustomers;
+			}
+		}
+
+		System.out.println(notHiddenCustomers + " customer(s)");
+	}
 }

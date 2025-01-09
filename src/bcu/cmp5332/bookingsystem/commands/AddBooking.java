@@ -1,11 +1,7 @@
-// added - completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
-import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
@@ -15,7 +11,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the addBooking command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class AddBooking implements Command {
 
@@ -24,7 +20,7 @@ public class AddBooking implements Command {
     private LocalDate bookingDate;
 
     /**
-     * Represents the addBooking command constructor
+     * Initialises the AddBooking object
      * 
      * @param customerId the booking's customer id (int)
      * 
@@ -43,7 +39,6 @@ public class AddBooking implements Command {
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        // TODO: implementation here
     	int maxId = 0;
         if (flightBookingSystem.getBookings().size() > 0) {
             int lastIndex = flightBookingSystem.getBookings().size() - 1;
@@ -65,7 +60,7 @@ public class AddBooking implements Command {
         customer.addBooking(booking); 
         flight.addPassenger(customer);
         
-        if (bookingDate == null) { // only prints message if booking made by user
+        if (bookingDate == null) { // only prints message if booking is made by the user
         	System.out.println("Booking #" + booking.getId() + " added.");
     	} 
     }

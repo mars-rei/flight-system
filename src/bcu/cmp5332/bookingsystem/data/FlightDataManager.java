@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * Represents a flight data manager 
  * 
- * implements the interface DataManager
+ * Implements the interface DataManager
  */
 public class FlightDataManager implements DataManager {
     

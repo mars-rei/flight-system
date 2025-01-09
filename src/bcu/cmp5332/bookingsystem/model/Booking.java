@@ -1,5 +1,3 @@
-// given - completed
-
 package bcu.cmp5332.bookingsystem.model;
 
 import java.time.LocalDate;
@@ -13,9 +11,10 @@ public class Booking {
     private Customer customer;
     private Flight flight;
     private LocalDate bookingDate;
+    private double price = flight.getPrice();
     
     /**
-     * Represents the booking class constructor
+     * Initialises the Booking object
      * 
      * @param id the id of the booking (int)
      * 
@@ -26,14 +25,11 @@ public class Booking {
      * @param bookingDate the date the flight was booked (local date)
      */
     public Booking(int id, Customer customer, Flight flight, LocalDate bookingDate) {
-        // TODO: implementation here
     	this.id = id;
     	this.customer = customer;
         this.flight = flight;
         this.bookingDate = bookingDate;
     }
-    
-    // TODO: implementation of Getter and Setter methods
     
     /**
      * Returns the booking id
@@ -91,11 +87,42 @@ public class Booking {
         this.bookingDate = bookingDate;
     }
     
-    // added
+    /**
+     * Returns the booking price
+     */
+    public double getBookingPrice() {
+        return price;
+    }
+
+    /**
+     * Sets the booking price
+     */
+    public void setBookingPrice(double newPrice) {
+        price = newPrice;
+    }
+    
     /**
      * Returns the booking details in short form
      */
     public String getDetailsShort() {
-        return "Booking #" + getId() + " - " + getCustomer().getName() + " - " + getFlight().getFlightNumber() + " - " + getBookingDate();
+        return "Booking #" + getId() + " - " + getCustomer().getName() + " - " + getFlight().getFlightNumber() + " - " + getBookingDate() + " - " + getBookingPrice();
+    }
+    
+    /**
+     * Returns the booking details in long form
+     */
+    public String getDetailsLong() {
+    	String longDetails = "";
+    	longDetails += "Booking #" + getId();
+    	longDetails += " - Booked by customer #" + getCustomer().getId();
+    	longDetails += " - " + getCustomer().getName();
+    	longDetails += "\n" + getBookingDate() + " for Flight #";
+    	longDetails += getFlight().getId() + " - ";
+    	longDetails += getFlight().getFlightNumber() + " - ";
+    	longDetails += getFlight().getOrigin() + " to ";
+    	longDetails += getFlight().getDestination() + " on ";
+    	longDetails += getFlight().getDepartureDate();
+    	longDetails += "\nPaid: £" + getBookingPrice();
+    	return longDetails;
     }
 }

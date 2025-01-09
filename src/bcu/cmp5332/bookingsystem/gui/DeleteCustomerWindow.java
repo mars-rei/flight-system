@@ -1,7 +1,7 @@
 package bcu.cmp5332.bookingsystem.gui;
 
-import bcu.cmp5332.bookingsystem.commands.AddCustomer;
 import bcu.cmp5332.bookingsystem.commands.Command;
+import bcu.cmp5332.bookingsystem.commands.RemoveCustomer;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -17,19 +17,17 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
- * Allows the user to add a customer to the flight booking system via the GUI
+ * Allows the user to delete a customer from the flight booking system via the GUI
  */
-public class AddCustomerWindow extends JFrame implements ActionListener {
+public class DeleteCustomerWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
-    private JTextField nameText = new JTextField();
-    private JTextField phoneText = new JTextField();
-    private JTextField emailText = new JTextField();
+    private JTextField idText = new JTextField();
 
-    private JButton addBtn = new JButton("Add");
+    private JButton deleteBtn = new JButton("Delete");
     private JButton cancelBtn = new JButton("Cancel");
 
-    public AddCustomerWindow(MainWindow mw) {
+    public DeleteCustomerWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
@@ -45,25 +43,21 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
 
         }
 
-        setTitle("Add a New Customer");
+        setTitle("Delete a Customer");
 
-        setSize(400, 220); // changed 350 to 400
+        setSize(400, 100); // changed 350 to 400
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(3, 1)); // changed from 5, 2 for it to be more legible
-        topPanel.add(new JLabel("Name : "));
-        topPanel.add(nameText);
-        topPanel.add(new JLabel("Phone : "));
-        topPanel.add(phoneText);
-        topPanel.add(new JLabel("Email : "));
-        topPanel.add(emailText);
+        topPanel.setLayout(new GridLayout(1, 2)); // changed from 5, 2 for it to be more legible
+        topPanel.add(new JLabel("ID : "));
+        topPanel.add(idText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
         bottomPanel.add(new JLabel("     "));
-        bottomPanel.add(addBtn);
+        bottomPanel.add(deleteBtn);
         bottomPanel.add(cancelBtn);
 
-        addBtn.addActionListener(this);
+        deleteBtn.addActionListener(this);
         cancelBtn.addActionListener(this);
 
         this.getContentPane().add(topPanel, BorderLayout.CENTER);
@@ -76,8 +70,8 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == addBtn) {
-            addCustomer(); 
+        if (ae.getSource() == deleteBtn) {
+            deleteCustomer(); 
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
@@ -85,20 +79,17 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds the customer to the flight booking system via the GUI
+     * Deletes a customer from the flight booking system via the GUI
      */
-    private void addCustomer() { 
+    private void deleteCustomer() { 
         try {
-            String name = nameText.getText();
-            String phone = phoneText.getText();
-            String email = emailText.getText();
+        	int id = Integer.parseInt(idText.getText());
             
-            // create and execute the AddCustomer Command
-            Command addCustomer = new AddCustomer(name, phone, email);
-            addCustomer.execute(mw.getFlightBookingSystem());
+            // create and execute the RemoveCustomer Command
+            Command removeCustomer = new RemoveCustomer(id);
+            removeCustomer.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of customers
             mw.displayCustomers();
-            // hide (close) the AddCustomerWindow
             this.setVisible(false);
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);

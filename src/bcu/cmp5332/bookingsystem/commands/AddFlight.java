@@ -1,18 +1,15 @@
 package bcu.cmp5332.bookingsystem.commands;
 
-import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
-import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 /**
  * Represents the addFlight command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class AddFlight implements  Command {
 
@@ -24,9 +21,9 @@ public class AddFlight implements  Command {
     private final double price;
     
     /**
-     * Represents the addFlight command constructor
+     * Initialises the AddFlight object
      * 
-     * @param flightNumber flight number (string)
+     * @param flightNumber the flight's number (string)
      * 
      * @param origin the airport the flight is coming from (string)
      * 

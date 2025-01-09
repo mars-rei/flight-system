@@ -1,11 +1,6 @@
-// UNFINISHED - NEED TO EDIT AFTER FINISHING ADD BOOKING
-
 package bcu.cmp5332.bookingsystem.commands;
 
-import java.time.LocalDate;
-
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
-import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -13,7 +8,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 /**
  * Represents the cancelBooking command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class CancelBooking implements Command {
 
@@ -21,11 +16,11 @@ public class CancelBooking implements Command {
     private final int flightId;
 
     /**
-     * Represents the cancelBooking command constructor
+     * Initialises the cancelBooking object
      * 
-     * @param customerId customer id of booking (int)
+     * @param customerId the booking's customer id (int)
      * 
-     * @param flightId flight id of booking (int)
+     * @param flightId the booking's flight id (int)
      */
     public CancelBooking(int customerId, int flightId) {
     	this.customerId = customerId;
@@ -37,7 +32,6 @@ public class CancelBooking implements Command {
      */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        // TODO: implementation here
     	Customer customer = flightBookingSystem.getCustomerByID(customerId);
     	Flight flight = flightBookingSystem.getFlightByID(flightId);
         

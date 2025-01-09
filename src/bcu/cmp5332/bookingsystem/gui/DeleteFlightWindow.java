@@ -1,7 +1,8 @@
 package bcu.cmp5332.bookingsystem.gui;
 
+import bcu.cmp5332.bookingsystem.commands.Command;
+import bcu.cmp5332.bookingsystem.commands.RemoveFlight;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,22 +13,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
- * Allows the user to view a customer's bookings via input in the GUi
+ * Allows the user to delete a flight from the flight booking system via the GUI
  */
-public class ShowCustomerBookingsWindow extends JFrame implements ActionListener {
-	
-    private MainWindow mw;
-    private JTextField customerText = new JTextField();
+public class DeleteFlightWindow extends JFrame implements ActionListener {
 
-    private JButton showBtn = new JButton("Show");
+    private MainWindow mw;
+    private JTextField idText = new JTextField();
+
+    private JButton deleteBtn = new JButton("Delete");
     private JButton cancelBtn = new JButton("Cancel");
 
-    public ShowCustomerBookingsWindow(MainWindow mw) {
+    public DeleteFlightWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
@@ -43,21 +43,21 @@ public class ShowCustomerBookingsWindow extends JFrame implements ActionListener
 
         }
 
-        setTitle("View Customer Bookings");
+        setTitle("Delete a Flight");
 
-        setSize(250, 100); 
+        setSize(400, 100); // changed 350 to 400
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(1, 2)); 
-        topPanel.add(new JLabel("Customer Id : "));
-        topPanel.add(customerText);
+        topPanel.setLayout(new GridLayout(1, 2)); // changed from 5, 2 for it to be more legible
+        topPanel.add(new JLabel("ID : "));
+        topPanel.add(idText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
         bottomPanel.add(new JLabel("     "));
-        bottomPanel.add(showBtn);
+        bottomPanel.add(deleteBtn);
         bottomPanel.add(cancelBtn);
 
-        showBtn.addActionListener(this);
+        deleteBtn.addActionListener(this);
         cancelBtn.addActionListener(this);
 
         this.getContentPane().add(topPanel, BorderLayout.CENTER);
@@ -67,31 +67,33 @@ public class ShowCustomerBookingsWindow extends JFrame implements ActionListener
         setVisible(true);
 
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == showBtn) {
-            try {
-				showCustomerBookings();
-			} catch (FlightBookingSystemException e) {
-				JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
-			} 
+        if (ae.getSource() == deleteBtn) {
+            deleteFlight(); 
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
 
     }
-    
+
     /**
-     * Shows a customer's bookings in the GUI
+     * Deletes a flight from the flight booking system via the GUI
      */
-    private void showCustomerBookings() throws FlightBookingSystemException { 
-        int customer = Integer.parseInt(customerText.getText());
-
-		// refresh the view with the list of flight passengers
-		mw.displayCustomerBookings(customer);
-		this.setVisible(false);
-
+    private void deleteFlight() { 
+        try {
+        	int id = Integer.parseInt(idText.getText());
+            
+            // create and execute the RemoveFlight Command
+            Command removeFlight = new RemoveFlight(id);
+            removeFlight.execute(mw.getFlightBookingSystem());
+            // refresh the view with the list of flight
+            mw.displayFlights();
+            this.setVisible(false);
+        } catch (FlightBookingSystemException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-   
+
 }

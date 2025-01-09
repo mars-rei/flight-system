@@ -1,5 +1,3 @@
-// given - to complete - need to add more javadoc comments later
-
 package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.commands.AddFlight;
@@ -20,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+/**
+ * Allows the user to add a flight to the flight booking system via the GUI
+ */
 public class AddFlightWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
@@ -94,6 +95,9 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Adds the flight to the flight booking system via the GUI
+     */
     private void addFlight() { // changed addBook to addFlight
         try {
             String flightNumber = flightNoText.getText();

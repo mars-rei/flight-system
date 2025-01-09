@@ -1,4 +1,4 @@
-// UNFINISHED
+// unfinished
 
 package bcu.cmp5332.bookingsystem.main;
 
@@ -15,8 +15,6 @@ public class Main {
 
 	/**
 	 * Represents the main class constructor
-	 * 
-	 * @param args an array of strings
 	 * 	 
 	 * @throws IOException thrown when there is an input / output error
 	 * 

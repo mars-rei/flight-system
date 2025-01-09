@@ -1,5 +1,3 @@
-// given - completed
-
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -9,7 +7,7 @@ import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 /**
  * Represents the loadGUI command
  * 
- * implements the interface Command
+ * Implements the interface Command
  */
 public class LoadGUI implements Command {
 

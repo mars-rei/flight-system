@@ -11,7 +11,6 @@ public class Booking {
     private Customer customer;
     private Flight flight;
     private LocalDate bookingDate;
-    private double price = flight.getPrice();
     
     /**
      * Initialises the Booking object
@@ -88,24 +87,10 @@ public class Booking {
     }
     
     /**
-     * Returns the booking price
-     */
-    public double getBookingPrice() {
-        return price;
-    }
-
-    /**
-     * Sets the booking price
-     */
-    public void setBookingPrice(double newPrice) {
-        price = newPrice;
-    }
-    
-    /**
      * Returns the booking details in short form
      */
     public String getDetailsShort() {
-        return "Booking #" + getId() + " - " + getCustomer().getName() + " - " + getFlight().getFlightNumber() + " - " + getBookingDate() + " - " + getBookingPrice();
+        return "Booking #" + getId() + " - " + getCustomer().getName() + " - " + getFlight().getFlightNumber() + " - " + getBookingDate();
     }
     
     /**
@@ -122,7 +107,6 @@ public class Booking {
     	longDetails += getFlight().getOrigin() + " to ";
     	longDetails += getFlight().getDestination() + " on ";
     	longDetails += getFlight().getDepartureDate();
-    	longDetails += "\nPaid: £" + getBookingPrice();
     	return longDetails;
     }
 }

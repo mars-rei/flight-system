@@ -2,91 +2,118 @@ package bcu.cmp5332.bookingsystem.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
+import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
-import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
-import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 class CustomerTest {
 
-	private Customer customer;
-	private Booking booking;
-	private Flight flight;
 	private FlightBookingSystem fbs;
 	
-	@BeforeEach 
-	void setUp() {
-		customer = new Customer(1, "John Doe", "07555555555", "johndoe@example.com");
-		flight = new Flight(1, "LH2560", "Birmingham", "Munich", LocalDate.parse("2024-11-11"), 100, 50.0);
-		booking = new Booking(1, customer, flight, LocalDate.now());
+	@Test
+	void addCustomer() throws FlightBookingSystemException {
 		fbs = new FlightBookingSystem();
-	}
-
-	@Test
-	void addBooking() throws FlightBookingSystemException {
-		customer.addBooking(booking);
-		assertTrue(customer.getBookings().contains(booking));
-	}
-
-	@Test
-	void cancelBooking() throws FlightBookingSystemException{
-		customer.addBooking(booking);
-		customer.cancelBookingForFlight(flight);
-		assertFalse(customer.getBookings().contains(booking)); 
-	}
-
-	@Test 
-	void addDuplicateBooking() throws FlightBookingSystemException {
-		Booking booking = new Booking(1, customer, flight, LocalDate.now());
-		customer.addBooking(booking);
+		Customer newCustomer = new Customer(6, "Seehem Ahmed", "07539829549","sa@bcu.ac.uk", false);
+		fbs.addCustomer(newCustomer);
 		
-		Exception exception = assertThrows(FlightBookingSystemException.class, () -> {
-			customer.addBooking(booking);
-		});
-		assertEquals("There is a booking with same customer and flight in the system", exception.getMessage());
+		// ensuring the ID is Correct
+		assertEquals(6, newCustomer.getId());
+		
+		// ensuring name is correct
+		assertEquals("Seehem Ahmed", newCustomer.getName());
+		
+		// ensuring phone number is correct
+		assertEquals("07539829549", newCustomer.getPhone());
+		
+		// ensuring email is correct
+		assertEquals("sa@bcu.ac.uk", newCustomer.getEmail());
+		
+		// ensuring isDeleted is false
+		assertFalse(newCustomer.getIsDeleted());
+		
+		// ensuring the booking list is empty
+		assertEquals(0, newCustomer.getBookings().size());
+		
+		// ensuring the customer has been added to the customers map in the fbs
+		assertTrue(fbs.getCustomers().contains(newCustomer));
+		
+		// ensuring the getDetailsShort() returns the correct details
+		assertEquals("Customer #6 - Seehem Ahmed - 07539829549 - sa@bcu.ac.uk", newCustomer.getDetailsShort());
+		
+		// ensures the getDetailsLong() returns the correct details
+		String expected = "Customer #6\nName: Seehem Ahmed\nPhone: 07539829549\nEmail: sa@bcu.ac.uk\n---------------\nBookings:\n0 booking(s)";
+		
+		assertEquals(expected, newCustomer.getDetailsLong());
 	}
 	
-	@Test 
-	void bookingNotFound() {
-		FlightBookingSystemException exception = assertThrows(FlightBookingSystemException.class, () -> {
-			customer.cancelBookingForFlight(flight);
-		});
-		assertEquals("There is no booking in the list that contains this flight.", exception.getMessage());
-	}
-
-	@Test 
-	void getDetailsShort() {
-		String expected = "Customer #1 - John Doe - 07555555555 - johndoe@example.com";
-		assertEquals(expected, customer.getDetailsShort());
-	}
-
-	@Test 
-	void getDetailsLong() throws FlightBookingSystemException {
-		customer.addBooking(booking);
-		String expected = "Customer #1\nName: John Doe\nPhone: 07555555555\nEmail: johndoe@example.com\n---------------\nBookings:\n Booking date: " 
-				+ LocalDate.now() + " for Flight #1 - LH2560 - Birmingham to Munich on 2024-11-11\n1 booking(s)";
-		assertEquals(expected, customer.getDetailsLong());
-	}
-	
-	/* not really sure if the two below are needed
 	@Test
-	void validPhoneNumber() {
-		assertEquals("07555555555", customer.getPhone());
-	}*/
+	void addCustomerDuplicateId() throws FlightBookingSystemException {
+		fbs = new FlightBookingSystem();
+		Customer newCustomer = new Customer(6, "Seehem Ahmed", "07539829549","sa@bcu.ac.uk", false);
+		fbs.addCustomer(newCustomer);
+		
+		Customer duplicateId = new Customer(6, "Haddie Mae", "07850129565","hm@bcu.ac.uk", false);
+		
+		Exception exception = assertThrows(IllegalArgumentException.class, ()-> {
+			fbs.addCustomer(duplicateId);
+		});
+		assertEquals("Duplicate customer ID.", exception.getMessage());
+	}
 	
-	/*@Test
-	void invalidPhoneNumber() {
-		Exception exception= assertThrows(IllegalArgumentException.class, () -> {
-			new Customer(1, "Abdel-Rahman Tawil", "07555555555555", "art@bcu.ac.uk");
-	});
-		assertEquals("Invalid phone number format", exception.getMessage());
-	}*/
+	@Test
+	void addCustomerDuplicateEmail() throws FlightBookingSystemException {
+		fbs = new FlightBookingSystem();
+		Customer newCustomer = new Customer(6, "Seehem Ahmed", "07539829549", "sa@bcu.ac.uk", false);
+		fbs.addCustomer(newCustomer);
+		
+		Customer duplicateEmail = new Customer(7, "Haddie Mae", "07850129565", "sa@bcu.ac.uk", false);
+		
+		Exception exception = assertThrows(FlightBookingSystemException.class, ()-> {
+			fbs.addCustomer(duplicateEmail);
+		});
+		assertEquals("There is a customer with the same email in the system", exception.getMessage());
+	}
 	
+	@Test
+	void listAllCustomers() throws FlightBookingSystemException {
+		fbs = new FlightBookingSystem();
+		Customer newCustomer = new Customer(6, "Seehem Ahmed", "07539829549","sa@bcu.ac.uk", false);
+		fbs.addCustomer(newCustomer);
+		
+		Customer newerCustomer = new Customer(7, "Haddie Mae", "07850129565","hm@bcu.ac.uk", false);
+		fbs.addCustomer(newerCustomer);
+		
+		
+		// unsure on how to test text output so taking this route of testing
+		// using the list customers code
+		List<Customer> customers = fbs.getCustomers();
+		String listCustomers = "";
+
+		for (Customer customer : customers) {
+			if (customer.getIsDeleted() == false) {
+				listCustomers += customer.getDetailsShort() + "/n"; 
+			}
+		}
+		
+		String expected = "Customer #" + newCustomer.getId() + " - " + newCustomer.getName() + " - " + newCustomer.getPhone() + " - " + newCustomer.getEmail() + 
+				"/nCustomer #" + newerCustomer.getId() + " - " + newerCustomer.getName() + " - " + newerCustomer.getPhone() + " - " + newerCustomer.getEmail()
+				+ "/n";
+		
+		assertEquals(listCustomers, expected);
+		
+		//make sure customers are listed
+		assertTrue(customers.size() > 0);
+
+		//make sure the new customers are in the list
+		assertTrue(customers.contains(newCustomer));
+		assertTrue(customers.contains(newerCustomer));
+	}
 }
+	
+
+
 

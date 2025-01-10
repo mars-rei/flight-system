@@ -197,14 +197,23 @@ public class FlightBookingSystem {
      * 
      * @param newFlight the flight to change to in the booking
      * 
+     * @param booking the booking that is being updated
+     * 
      * @throws FlightBookingSystemException thrown when there is already a booking 
      * in the system with the same customer and flight 
      */
-    public void editBooking(Flight newFlight) throws FlightBookingSystemException {
+    public void editBooking(Flight newFlight, Booking booking) throws FlightBookingSystemException {
     	// if user tries to update booking to a full flight
     	if (newFlight.getPassengers().size() == newFlight.getCapacity()) {
     		throw new FlightBookingSystemException("This flight has reached its capacity. Booking unsuccessful.");
     	}
+    	
+    	for (Booking existing : bookings.values()) {
+            if (existing.getCustomer().equals(booking.getCustomer())
+            		&& existing.getFlight().equals(booking.getFlight())) {
+                throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
+            }
+        }
     }
     
     /**

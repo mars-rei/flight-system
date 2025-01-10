@@ -39,7 +39,7 @@ public class EditBooking implements Command {
     	
     	Customer customer = booking.getCustomer();
     	
-    	flightBookingSystem.editBooking(flight);
+    	flightBookingSystem.editBooking(flight, booking);
     	
     	booking.setFlight(flight);
     	flight.addPassenger(customer);

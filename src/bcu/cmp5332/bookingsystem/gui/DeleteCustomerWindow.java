@@ -45,9 +45,9 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
 
         setTitle("Delete a Customer");
 
-        setSize(400, 100); // changed 350 to 400
+        setSize(400, 100);
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(1, 2)); // changed from 5, 2 for it to be more legible
+        topPanel.setLayout(new GridLayout(1, 2)); 
         topPanel.add(new JLabel("ID : "));
         topPanel.add(idText);
 

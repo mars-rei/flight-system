@@ -1,5 +1,6 @@
 package bcu.cmp5332.bookingsystem.gui;
 
+import bcu.cmp5332.bookingsystem.commands.AddBooking;
 import bcu.cmp5332.bookingsystem.commands.AddCustomer;
 import bcu.cmp5332.bookingsystem.commands.Command;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
@@ -17,19 +18,18 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 /**
- * Allows the user to add a customer to the flight booking system via the GUI
+ * Allows the user to add a booking to the flight booking system via the GUI
  */
-public class AddCustomerWindow extends JFrame implements ActionListener {
+public class AddBookingWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
-    private JTextField nameText = new JTextField();
-    private JTextField phoneText = new JTextField();
-    private JTextField emailText = new JTextField();
+    private JTextField customerIdText = new JTextField();
+    private JTextField flightIdText = new JTextField();
 
-    private JButton addBtn = new JButton("Add");
+    private JButton issueBtn = new JButton("Issue");
     private JButton cancelBtn = new JButton("Cancel");
 
-    public AddCustomerWindow(MainWindow mw) {
+    public AddBookingWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
@@ -45,25 +45,23 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
 
         }
 
-        setTitle("Add a New Customer");
+        setTitle("Issue booking");
 
         setSize(400, 220); 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(3, 1)); 
-        topPanel.add(new JLabel("Name : "));
-        topPanel.add(nameText);
-        topPanel.add(new JLabel("Phone : "));
-        topPanel.add(phoneText);
-        topPanel.add(new JLabel("Email : "));
-        topPanel.add(emailText);
+        topPanel.add(new JLabel("Customer Id : "));
+        topPanel.add(customerIdText);
+        topPanel.add(new JLabel("Flight Id : "));
+        topPanel.add(flightIdText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
         bottomPanel.add(new JLabel("     "));
-        bottomPanel.add(addBtn);
+        bottomPanel.add(issueBtn);
         bottomPanel.add(cancelBtn);
 
-        addBtn.addActionListener(this);
+        issueBtn.addActionListener(this);
         cancelBtn.addActionListener(this);
 
         this.getContentPane().add(topPanel, BorderLayout.CENTER);
@@ -76,7 +74,7 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == addBtn) {
+        if (ae.getSource() == issueBtn) {
             addCustomer(); 
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
@@ -85,20 +83,17 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Adds the customer to the flight booking system via the GUI
+     * Adds the booking to the flight booking system via the GUI
      */
     private void addCustomer() { 
         try {
-            String name = nameText.getText();
-            String phone = phoneText.getText();
-            String email = emailText.getText();
+        	int customerId = Integer.parseInt(customerIdText.getText());
+        	int flightId= Integer.parseInt(flightIdText.getText());
             
-            // create and execute the AddCustomer Command
-            Command addCustomer = new AddCustomer(name, phone, email);
-            addCustomer.execute(mw.getFlightBookingSystem());
-            // refresh the view with the list of customers
-            mw.displayCustomers();
-            // hide (close) the AddCustomerWindow
+            // create and execute the AddBooking Command
+            Command addBooking = new AddBooking(customerId, flightId, null);
+            addBooking.execute(mw.getFlightBookingSystem());
+            mw.displayBookings();
             this.setVisible(false);
         } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);

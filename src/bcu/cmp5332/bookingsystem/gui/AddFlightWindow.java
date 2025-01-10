@@ -52,9 +52,9 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         setTitle("Add a New Flight");
 
-        setSize(400, 220); // changed 350 to 400
+        setSize(400, 220); 
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(10, 1)); // changed from 5, 2 for it to be more legible
+        topPanel.setLayout(new GridLayout(10, 1)); 
         topPanel.add(new JLabel("Flight No : "));
         topPanel.add(flightNoText);
         topPanel.add(new JLabel("Origin : "));

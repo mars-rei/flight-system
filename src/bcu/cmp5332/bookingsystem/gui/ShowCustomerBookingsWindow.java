@@ -88,7 +88,6 @@ public class ShowCustomerBookingsWindow extends JFrame implements ActionListener
     private void showCustomerBookings() throws FlightBookingSystemException { 
         int customer = Integer.parseInt(customerText.getText());
 
-		// refresh the view with the list of flight passengers
 		mw.displayCustomerBookings(customer);
 		this.setVisible(false);
 

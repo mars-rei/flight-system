@@ -1,4 +1,4 @@
 1::LH2560::Birmingham::Munich::2022-11-25::25::40.99::false::
 2::JAL42::London::Tokyo::2024-12-17::60::200.99::false::
-3::EZY6615::Birmingham::Milan::2025-04-18::1::35.0::false::
-4::EK40::Birmingham::Dubai::2025-10-09::52::499.99::true::
+3::EZY6615::Birmingham::Milan::2025-04-18::1::35.0::true::
+4::EK40::Birmingham::Dubai::2025-10-09::52::499.99::false::

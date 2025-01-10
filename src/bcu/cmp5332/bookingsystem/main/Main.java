@@ -8,7 +8,6 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import java.io.*;
-import java.time.LocalDate;
 
 /**
  * Main class of the flight booking system application

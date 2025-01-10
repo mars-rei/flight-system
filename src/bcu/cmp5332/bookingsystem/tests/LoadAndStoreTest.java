@@ -1,6 +1,5 @@
 package bcu.cmp5332.bookingsystem.tests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
@@ -16,7 +15,6 @@ import bcu.cmp5332.bookingsystem.data.CustomerDataManager;
 import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.data.FlightDataManager;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
-import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -37,11 +35,11 @@ class LoadAndStoreTest {
 		
 		BookingDataManager bdm = new BookingDataManager();
 		bdm.storeData(fbs);
-        Scanner sc = new Scanner(new File("./resources/data/bookings.txt"));
+        Scanner bdmsc = new Scanner(new File("./resources/data/bookings.txt"));
         int bdmline_idx = 1;
         String bookingText = "";
-        while (sc.hasNextLine()) {
-        	String line = sc.nextLine();
+        while (bdmsc.hasNextLine()) {
+        	String line = bdmsc.nextLine();
         	bookingText += line;
         	bdmline_idx++;
         }
@@ -50,11 +48,11 @@ class LoadAndStoreTest {
         
 		FlightDataManager fdm = new FlightDataManager();
 		fdm.storeData(fbs);
-        sc = new Scanner(new File("./resources/data/flights.txt"));
+        Scanner fdmsc = new Scanner(new File("./resources/data/flights.txt"));
         int fdmline_idx = 1;
         String flightText = "";
-        while (sc.hasNextLine()) {
-        	String line = sc.nextLine();
+        while (fdmsc.hasNextLine()) {
+        	String line = fdmsc.nextLine();
         	flightText += line;
         	fdmline_idx++;
         }
@@ -62,11 +60,11 @@ class LoadAndStoreTest {
 		
 		CustomerDataManager cdm = new CustomerDataManager();
 		cdm.storeData(fbs);
-        sc = new Scanner(new File("./resources/data/customers.txt"));
+        Scanner cdmsc = new Scanner(new File("./resources/data/customers.txt"));
         int cdmline_idx = 1;
         String customerText = "";
-        while (sc.hasNextLine()) {
-        	String line = sc.nextLine();
+        while (cdmsc.hasNextLine()) {
+        	String line = cdmsc.nextLine();
         	customerText += line;
         	cdmline_idx++;
         }

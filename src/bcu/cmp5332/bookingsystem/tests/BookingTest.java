@@ -3,17 +3,11 @@ package bcu.cmp5332.bookingsystem.tests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
 import bcu.cmp5332.bookingsystem.commands.AddBooking;
-import bcu.cmp5332.bookingsystem.data.BookingDataManager;
-import bcu.cmp5332.bookingsystem.data.CustomerDataManager;
-import bcu.cmp5332.bookingsystem.data.FlightDataManager;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;

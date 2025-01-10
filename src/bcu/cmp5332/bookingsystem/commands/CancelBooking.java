@@ -1,6 +1,7 @@
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
@@ -42,24 +43,19 @@ public class CancelBooking implements Command {
     }
     
     /*
-    @Override // TODO
-    public void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {  
+     * Restores previous state when there is an error storing data
+     */
+    @Override 
+    public void rollback(FlightBookingSystem flightBookingSystem, Booking booking) {  
     	System.out.println("Error updating booking data.");
-    	
 		try {
-			Customer bookingCustomer = flightBookingSystem.getCustomerByID(customerId);
-			Flight bookingFlight = flightBookingSystem.getFlightByID(flightId);
+			Customer bookingCustomer = booking.getCustomer();
+			Flight bookingFlight = booking.getFlight();
 	    	
-	    	// rollback will reset the booking date - so this method is still inaccurate
-	    	LocalDate bookedDate = flightBookingSystem.getSystemDate();
-	        
-	    	int lastIndex = flightBookingSystem.getBookings().size() - 1;
-            int maxId = flightBookingSystem.getBookings().get(lastIndex).getId();
-	    	
-	        Booking booking = new Booking(++maxId, bookingCustomer, bookingFlight, bookedDate);
-	        bookingCustomer.addBooking(booking); 
+	        Booking resetBooking = new Booking(booking.getId(), bookingCustomer, bookingFlight, booking.getBookingDate());
+	        bookingCustomer.addBooking(resetBooking); 
 	        bookingFlight.addPassenger(bookingCustomer);
-	        flightBookingSystem.addBooking(booking);
+	        flightBookingSystem.addBooking(resetBooking);
 	        
 		} catch (FlightBookingSystemException e) {
 			System.out.println(e.getMessage());
@@ -68,5 +64,4 @@ public class CancelBooking implements Command {
 		System.out.println("Booking cancellation withdrawn.");
 		
     }
-    */
 }

@@ -1,6 +1,8 @@
 package bcu.cmp5332.bookingsystem.commands;
 
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.Booking;
+import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 /**
@@ -34,14 +36,20 @@ public interface Command {
 	 */
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException;
     
-    /*
     default void rollback(FlightBookingSystem flightBookingSystem) {
     	// default is empty as this only affects commands that update the state of the system
     }
     
-    default void rollback(FlightBookingSystem flightBookingSystem, int customer, int flight) {
-    	// default is empty as this only affects the editbooking and cancelbooking commands
+    default void rollback(FlightBookingSystem flightBookingSystem, int customerOrFlight) {
+    	// default is empty as this only affects the removecustomer and removeflight commands
     }
-    */
+    
+    default void rollback(FlightBookingSystem flightBookingSystem, Booking booking) {
+    	// default is empty as this only affects the cancelbooking command
+    }
+    
+    default void rollback(FlightBookingSystem flightBookingSystem, int booking, int flight, Flight originalFlight) {
+    	// default is empty as this only affects the editbooking commands
+    }
     
 }

@@ -31,4 +31,23 @@ public class RemoveFlight implements Command {
     	flightBookingSystem.removeFlight(flight);
     	System.out.println("Flight #" + id + " removed.");
     }
+    
+    /**
+     * Restores previous state when there is an error storing data
+     */
+    @Override 
+    public void rollback(FlightBookingSystem flightBookingSystem, int flight) {  
+    	System.out.println("Error updating flight data.");
+    	
+		try {
+			Flight bookingFlight = flightBookingSystem.getFlightByID(flight);
+			flightBookingSystem.reAddFlight(bookingFlight);
+	        
+		} catch (FlightBookingSystemException e) {
+			System.out.println(e.getMessage());
+		}
+    	
+		System.out.println("Customer removal withdrawn.");
+		
+    }
 }

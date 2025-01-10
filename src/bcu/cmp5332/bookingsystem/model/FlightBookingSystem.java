@@ -126,6 +126,16 @@ public class FlightBookingSystem {
     	// new code to hide deleted flights
     	flight.setIsDeleted(true);
     }
+    
+    /**
+     * Re-adds flight to flight booking system (rollback)
+     * 
+     * @param flight the flight object to be re-add
+     */
+    public void reAddFlight(Flight flight){
+    	// unhide removed flight
+    	flight.setIsDeleted(false);
+    }
 
     /**
      * Adds customer to flight booking system
@@ -162,6 +172,16 @@ public class FlightBookingSystem {
     	
     	// new code to hide deleted customers
     	customer.setIsDeleted(true);
+    }
+    
+    /**
+     * Re-adds customer to flight booking system (rollback)
+     * 
+     * @param customer the customer object to be re-add
+     */
+    public void reAddCustomer(Customer customer){
+    	// unhide removed customer
+    	customer.setIsDeleted(false);
     }
     
     /**
@@ -207,13 +227,7 @@ public class FlightBookingSystem {
     	if (newFlight.getPassengers().size() == newFlight.getCapacity()) {
     		throw new FlightBookingSystemException("This flight has reached its capacity. Booking unsuccessful.");
     	}
-    	
-    	for (Booking existing : bookings.values()) {
-            if (existing.getCustomer().equals(booking.getCustomer())
-            		&& existing.getFlight().equals(booking.getFlight())) {
-                throw new FlightBookingSystemException("There is a booking with same customer and flight in the system");
-            }
-        }
+    
     }
     
     /**

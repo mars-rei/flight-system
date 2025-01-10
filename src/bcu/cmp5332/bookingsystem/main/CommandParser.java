@@ -41,7 +41,6 @@ public class CommandParser {
         try {
             String[] parts = line.split(" ", 3);
             String cmd = parts[0];
-
             
             if (cmd.equals("addflight")) { 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

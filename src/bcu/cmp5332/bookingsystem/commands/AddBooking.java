@@ -65,7 +65,9 @@ public class AddBooking implements Command {
     	} 
     }
     
-    /*
+    /**
+     * Restores previous state when there is an error storing data
+     */
     @Override
     public void rollback(FlightBookingSystem flightBookingSystem) {  
     	System.out.println("Error storing new booking data.");
@@ -85,5 +87,4 @@ public class AddBooking implements Command {
 		System.out.println("Booking addition withdrawn.");
        
     }
-    */
 }

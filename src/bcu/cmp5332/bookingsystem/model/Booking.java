@@ -101,7 +101,7 @@ public class Booking {
     	longDetails += "Booking #" + getId();
     	longDetails += " - Booked by customer #" + getCustomer().getId();
     	longDetails += " - " + getCustomer().getName();
-    	longDetails += "\n" + getBookingDate() + " for Flight #";
+    	longDetails += "\n Booked on " + getBookingDate() + " for Flight #";
     	longDetails += getFlight().getId() + " - ";
     	longDetails += getFlight().getFlightNumber() + " - ";
     	longDetails += getFlight().getOrigin() + " to ";
